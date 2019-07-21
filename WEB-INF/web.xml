@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app>
+
+
     <servlet>
         <servlet-name>UploadServlet</servlet-name>
         <servlet-class>myservlet.UploadServlet</servlet-class>
@@ -44,7 +46,42 @@
         <servlet-name>ChangeShareServlet</servlet-name>
         <url-pattern>/ChangeShareServlet</url-pattern>
     </servlet-mapping>
-
+	
+	<servlet>
+        <servlet-name>HomeworkServlet</servlet-name>
+        <servlet-class>myservlet.HomeworkServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HomeworkServlet</servlet-name>
+        <url-pattern>/HomeworkServlet</url-pattern>
+    </servlet-mapping>
+	
+	<servlet>
+        <servlet-name>makeannounce</servlet-name>
+        <servlet-class>myservlet.makeannounce</servlet-class>
+    </servlet>
+	<servlet-mapping>
+        <servlet-name>makeannounce</servlet-name>
+        <url-pattern>/makeannounce</url-pattern>
+    </servlet-mapping>
+	
+	<servlet>
+        <servlet-name>makework</servlet-name>
+        <servlet-class>myservlet.makework</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>makework</servlet-name>
+        <url-pattern>/makework  </url-pattern>
+    </servlet-mapping>
+	
+	<servlet>
+        <servlet-name>addStu_servlet</servlet-name>
+        <servlet-class>myservlet.addStu_servlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>addStu_servlet</servlet-name>
+        <url-pattern>/addStu_servlet  </url-pattern>
+    </servlet-mapping>
 
     <session-config>
         <session-timeout>

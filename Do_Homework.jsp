@@ -1,3 +1,5 @@
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.io.BufferedReader"%>
 <%@page import="java.io.FileReader"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -6,10 +8,8 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>MarkDown</title>
-		<!--适配手机-->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<link rel="shortcut icon" href="http://admin.zrstt.cn/group1/M00/00/00/rB_YCFsQ_OmAP6VFAAAQvtuENdk882.ico">
-		<!--使用bootstrap的样式，比较好看-->
 		<link href="http://cdn.bootcss.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 		<style>
 			#text-input {
@@ -52,17 +52,43 @@
 		</center>
 
                 <%
-                    
+                    String Name = request.getParameter("name");
                     String Tea_ID = request.getParameter("teaid");
                     String Cou_ID = request.getParameter("couid");
                     String Class_ID = request.getParameter("classid");
-                    String Name = request.getParameter("name");
                     
-                    String apath = request.getServletContext().getRealPath("/") + "upload/"+Tea_ID+"/"+Cou_ID+"/"+Class_ID+"/"+Name+"homework.txt";
+                    String path = request.getServletContext().getRealPath("/") + "upload/"+Tea_ID+"/"+Cou_ID+"/"+Class_ID+"/"+Name+"/work.txt";
+                    String timepath = request.getServletContext().getRealPath("/") + "upload/"+Tea_ID+"/"+Cou_ID+"/"+Class_ID+"/"+Name+"/time.txt";
                     
-                //作业txt文件的绝对路径
-                    String path = request.getServletContext().getRealPath("/")+"view_txt/use.txt";
-                
+                    FileReader timereader = new FileReader(timepath);
+                    BufferedReader timebufferedReader = new BufferedReader(timereader);
+                    StringBuffer time = new StringBuffer();
+                    String tmp = null;
+                    while((tmp = timebufferedReader.readLine()) != null) {
+                        time.append(tmp);
+                    }
+                    timereader.close();
+                    timebufferedReader.close();
+                    String end = new String(time);
+                    
+                    SimpleDateFormat sdf = new SimpleDateFormat();
+                    sdf.applyPattern("yyyy-MM-dd-HH-mm-ss");
+                    Date date = new Date();
+                    String now = sdf.format(date);
+                    
+                    String target = "HomeworkServlet?workname="+Name;
+                    
+                    try{
+                        if(sdf.parse(now).getTime()>sdf.parse(end).getTime()){//转成long类型比较
+                            target = "overtime.jsp";
+                        }
+                        else{
+                            target = "HomeworkServlet?workname="+Name;
+                        }
+                    }catch(Exception e){
+                        out.print(e);
+                    }
+                    
                     FileReader reader = new FileReader(path);
                     BufferedReader bufferedReader = new BufferedReader(reader);
                     StringBuffer txt = new StringBuffer();
@@ -73,14 +99,16 @@
                     }
                     reader.close();
                     bufferedReader.close();
+                    
                 %>
-        
+                
+                
 		<div class="row">
                     <textarea class="bg-success" id="text-input" oninput="this.editor.update()" rows="6"><%=txt%></textarea>
                     <div id="preview" class="bg-primary" rows="6"> </div>
 		</div>
                 <div class="row">
-                    <form action = "HomeworkServlet" method="post" >
+                    <form action = <%=target%> method="post" >
                         <textarea name="work" class="bg-success" id="write-text" rows="6"></textarea>
                         <input type="submit" value="提交">
                     </form>

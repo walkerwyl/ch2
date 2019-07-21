@@ -4,18 +4,18 @@
 <%@page import="java.util.Iterator"%>
 <%@page import="mybean.student_bean"%>
 <%@page import="mybean.info_bean"%>
-<%@page contentType="text/html" pageEncoding="GBK"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <jsp:useBean id="StudentBean" type="mybean.student_bean" scope="session"/>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=GBK">
-        <title>Ñ§ÉúÖ÷Ò³</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>å­¦ç”Ÿä¸»é¡µ</title>
     </head>
     <body>
-        <br><a href="ChangePassword.jsp">ĞŞ¸ÄÃÜÂë>>>>>></a>
-        Ãû×Ö:<jsp:getProperty name="StudentBean" property="name"/>
-        ĞÔ±ğ:<jsp:getProperty name="StudentBean" property="gender"/>
+        <br><a href="ChangePassword.jsp">ä¿®æ”¹å¯†ç >>>>>></a>
+        åå­—:<jsp:getProperty name="StudentBean" property="name"/>
+        æ€§åˆ«:<jsp:getProperty name="StudentBean" property="gender"/>
         
         <%
             PreparedStatement ps1,ps2;
@@ -27,9 +27,9 @@
                     ps1.setString(1, n.getClass_ID());
                     rs1 = ps1.executeQuery();
                     while(rs1.next()){
-                    out.print("<br>¿Î³Ì£º");
+                    out.print("<br>è¯¾ç¨‹ï¼š");
                     out.print(rs1.getString(3));
-                    out.print("¡ª¡ªÀÏÊ¦£º");
+                    out.print("â€”â€”è€å¸ˆï¼š");
                     
                     ps2= DB.dbCon().prepareStatement("select * from teacher where Tea_ID=?");
                     ps2.setString(1,rs1.getString(4));
@@ -37,27 +37,29 @@
                         while(rs2.next()){
                             out.print(rs2.getString(1));
                     
-                            out.print("¡ª¡ª°à¼¶ID£º");
+                            out.print("â€”â€”ç­çº§IDï¼š");
                             out.print(rs1.getString(2));
-                            out.print("<br>Ñ§Ï°Çé¿ö:   Ñ§Ï°Ê±¼ä£º");
+                            out.print("<br>å­¦ä¹ æƒ…å†µ:   å­¦ä¹ æ—¶é—´ï¼š");
                             out.print(n.getMy_Time());
-                            out.print("     Ñ§Ï°´ÎÊı£º");
+                            out.print("     å­¦ä¹ æ¬¡æ•°ï¼š");
                             out.print(n.getMy_Count());
-                            out.print("<PRE>×÷Òµ1£º  ³É¼¨£º");
+                            out.print("<PRE>ä½œä¸š1ï¼š  æˆç»©ï¼š");
                             out.print(n.getWork1());
-                            out.print("  <a href=Do_Homework.jsp?name=work1&teaid="+rs1.getString(4)+"&couid="+rs1.getString(1)+"&classid="+n.getClass_ID()+">Ğ´×÷Òµ</a>");
-                            out.print("<br>×÷Òµ2£º  ³É¼¨£º");
+                            out.print("  <a href=Do_Homework.jsp?name=work1&teaid="+rs1.getString(4)+"&couid="+rs1.getString(1)+"&classid="+n.getClass_ID()+">å†™ä½œä¸š</a>");
+                            out.print("<br>ä½œä¸š2ï¼š  æˆç»©ï¼š");
                             out.print(n.getWork2());
-                            out.print("  <a href=Do_Homework.jsp?name=work2&teaid="+rs1.getString(4)+"&couid="+rs1.getString(1)+"&classid="+n.getClass_ID()+">Ğ´×÷Òµ</a>");
-                            out.print("<br>×÷Òµ3£º  ³É¼¨£º");
+                            out.print("  <a href=Do_Homework.jsp?name=work2&teaid="+rs1.getString(4)+"&couid="+rs1.getString(1)+"&classid="+n.getClass_ID()+">å†™ä½œä¸š</a>");
+                            out.print("<br>ä½œä¸š3ï¼š  æˆç»©ï¼š");
                             out.print(n.getWork3());
-                            out.print("  <a href=Do_Homework.jsp?name=work3&teaid="+rs1.getString(4)+"&couid="+rs1.getString(1)+"&classid="+n.getClass_ID()+">Ğ´×÷Òµ</a>");
-                            out.print("<br><a href=View_Markdown.jsp>²é¿´Í¨Öª</a>");
+                            out.print("  <a href=Do_Homework.jsp?name=work3&teaid="+rs1.getString(4)+"&couid="+rs1.getString(1)+"&classid="+n.getClass_ID()+">å†™ä½œä¸š</a>");
+                            out.print("<br><a href=readannounce.jsp?classid=");
+							out.print(rs1.getString(2));
+							out.print(">æŸ¥çœ‹é€šçŸ¥</a>");
                             out.print("</PRE>");
                         }
                     }
                 }
-            out.print("<a href=View_Sources.jsp>²é¿´½ÌÑ§×ÊÔ´</a>"); 
+            out.print("<a href=View_Sources.jsp>æŸ¥çœ‹æ•™å­¦èµ„æº</a>"); 
         %>
     </body>
 </html>
