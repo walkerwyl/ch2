@@ -34,9 +34,9 @@ public class HomeworkServlet extends HttpServlet {
         String Class_ID = request.getParameter("classid");
         String workname = request.getParameter("workname");
 
-        String fileName = stu.getStu_ID() + ".txt";
+        String fileName = stu.getStu_ID + ".txt";
 
-        String filePath = request.getServletContext().getRealPath( "/upload/"+Tea_ID+"/"+Cou_ID+"/"+Class_ID+"/"+workname+"/"+fileName );
+        String filePath = request.getServletContext().getRealPath("/") + "upload/"+Tea_ID+"/"+Cou_ID+"/"+Class_ID+"/"+workname+"/"+fileName;
         try {
             writer = new FileWriter(filePath);
             writer.write(tt);

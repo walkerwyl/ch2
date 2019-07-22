@@ -37,16 +37,16 @@ public class makeannounce extends HttpServlet {
         String cou_ID = cla.getCou_ID();
         String cla_ID = cla.getClass_ID();
 
-        File updir = new File(tea_ID + "/" + cou_ID + "/" + cla_ID);//判断有没有这个班级的文件夹
+        File updir = new File(request.getServletContext().getRealPath("/upload/" + tea_ID + "/" + cou_ID + "/" + cla_ID));//判断有没有这个班级的文件夹
         if (!updir.exists()) {
             updir.mkdir();
         }
-        File updir2 = new File(tea_ID + "/" + cou_ID + "/" + cla_ID + "/announce");
+        File updir2 = new File(request.getServletContext().getRealPath("/upload/" + tea_ID + "/" + cou_ID + "/" + cla_ID + "/announce"));
         if (!updir2.exists()) {
             updir2.mkdir();
         }
 
-        String filePath = "upload/" + tea_ID + "/" + cou_ID + "/" + cla_ID + "/announce/" + fileName;
+        String filePath = request.getServletContext().getRealPath("/upload/" + tea_ID + "/" + cou_ID + "/" + cla_ID + "/announce/" + fileName);
 
         try {
             writer = new FileWriter(filePath);

@@ -33,8 +33,6 @@ public class createClass extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
-        //response.setCharacterEncoding("utf-8");
-        //response.setContentType("text/html;charset=utf-8");
         //存储路径
         String savePath = request.getServletContext().getRealPath("/WEB-INF/classes/uploadFile");
         //获取上传的文件集合
@@ -55,14 +53,15 @@ public class createClass extends HttpServlet {
             part.write(savePath + File.separator + fileName);
             //读取文件分析
             File file = new File(savePath, fileName);
-
             writedb(file, response);
             file.delete();
-            response.sendRedirect("class_info.jsp?create=yes");
+            
+            
+           
         }
     }
 
-    public void writedb(File file, HttpServletResponse response) {
+    public void writedb(File file, HttpServletResponse response) throws IOException {
 
         ResultSet class_rs;
         ResultSet tea_rs;
@@ -119,10 +118,10 @@ public class createClass extends HttpServlet {
             ps.executeUpdate();
             //学生信息
             String stu_ID, stu_name;
-            ps = con.prepareStatement("insert into info(Class_ID,Stu_ID,Stu_Name) values(?,?,?)");
-            for (int i = 5; i < rowLength + 1; i++) {
+            ps = con.prepareStatement("insert into info values(?,?,0,0,0,0,0,?)");
+            for (int i = 5; i < rowLength ; i++) {
                 XSSFCell cell = sheet.getRow(i).getCell(1);
-                if (cell.getStringCellValue() != null) {
+                if (cell.getStringCellValue().length()>5) {
                     stu_ID = sheet.getRow(i).getCell(1).getStringCellValue();
                     stu_name = sheet.getRow(i).getCell(2).getStringCellValue();
                     ps.setString(1, class_ID);
@@ -132,15 +131,15 @@ public class createClass extends HttpServlet {
                 } else {
                     break;
                 }
-
             }
-
+            response.sendRedirect("class_info.jsp?create=yes");
         } catch (Exception ex) {
-            try {
+           try {
                 response.sendRedirect("class_info.jsp?create=no");
             } catch (IOException ex1) {
                 Logger.getLogger(createClass.class.getName()).log(Level.SEVERE, null, ex1);
             }
+           
         }
     }
 

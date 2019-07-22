@@ -82,36 +82,33 @@ public class makework extends HttpServlet {
         String cou_ID = cla.getCou_ID();
         String cla_ID = cla.getClass_ID();
 
-        File updir = new File(tea_ID + "/" + cou_ID + "/" + cla_ID);//判断有没有这个班级的文件夹
+        File updir = new File(request.getServletContext().getRealPath("/upload/" + tea_ID + "/" + cou_ID + "/" + cla_ID));//判断有没有这个班级的文件夹
         if (!updir.exists()) {
             updir.mkdir();
         }
 
         String mm = "work1";
-        String path = tea_ID + "/" + cou_ID + "/" + cla_ID + "/" + mm;
-        File backfile = new File(path);
-        if (backfile != null && backfile.exists() && backfile.isDirectory()) {
-            File[] files = backfile.listFiles();
-            if (files != null && files.length > 0) {
-                mm = "work2";
-            }
+        String path = request.getServletContext().getRealPath("/upload/" + tea_ID + "/" + cou_ID + "/" + cla_ID + "/" + mm);
+        File updir2 = new File(path);
+        if (!updir2.exists()) {
+            updir2.mkdir();
+        } else {
+            mm = "work2";
         }
-        path = tea_ID + "/" + cou_ID + "/" + cla_ID + "/" + mm;
-        backfile = new File(path);
-        if (backfile != null && backfile.exists() && backfile.isDirectory()) {
-            File[] files = backfile.listFiles();
-            if (files != null && files.length > 0) {
-                mm = "work3";
-            }
-        }
-        File updir3 = new File(tea_ID + "/" + cou_ID + "/" + cla_ID + "/" + mm);
+        File updir3 = new File(path);
         if (!updir3.exists()) {
             updir3.mkdir();
+        } else {
+            mm = "work3";
+        }
+        File updir4 = new File(path);
+        if (!updir4.exists()) {
+            updir4.mkdir();
         }
 
-        String filePath = "upload/" + tea_ID + "/" + cou_ID + "/" + cla_ID + "/" + mm + "/work.txt";//得到文件路径和名称组合
-        String filePath2 = "upload/" + tea_ID + "/" + cou_ID + "/" + cla_ID + "/" + mm + "/answer.txt";
-        String filePath3 = "upload/" + tea_ID + "/" + cou_ID + "/" + cla_ID + "/" + mm + "/time.txt";
+        String filePath = path + "/work.txt";//得到文件路径和名称组合
+        String filePath2 = path + "/answer.txt";
+        String filePath3 = path + "/time.txt";
 
         try {
             writer = new FileWriter(filePath);//写文件

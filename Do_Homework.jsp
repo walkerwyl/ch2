@@ -76,14 +76,14 @@
                     Date date = new Date();
                     String now = sdf.format(date);
                     
-                    String target = "HomeworkServlet?workname="+Name;
+                    String target = "HomeworkServlet?workname="+Name+"&teaid="+Tea_ID+"&couid="+Cou_ID+"&classid="+Class_ID;
                     
                     try{
                         if(sdf.parse(now).getTime()>sdf.parse(end).getTime()){//转成long类型比较
                             target = "overtime.jsp";
                         }
                         else{
-                            target = "HomeworkServlet?workname="+Name;
+                            target = "HomeworkServlet?workname="+Name+"&teaid="+Tea_ID+"&couid="+Cou_ID+"&classid="+Class_ID;
                         }
                     }catch(Exception e){
                         out.print(e);
