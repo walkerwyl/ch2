@@ -132,10 +132,10 @@ public class createClass extends HttpServlet {
                     break;
                 }
             }
-            response.sendRedirect("class_info.jsp?create=yes");
+            response.sendRedirect("Tea_Homepage.jsp?create=yes");
         } catch (Exception ex) {
            try {
-                response.sendRedirect("class_info.jsp?create=no");
+                response.sendRedirect("Tea_Homepage.jsp?create=no");
             } catch (IOException ex1) {
                 Logger.getLogger(createClass.class.getName()).log(Level.SEVERE, null, ex1);
             }

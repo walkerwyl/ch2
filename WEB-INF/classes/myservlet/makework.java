@@ -61,7 +61,6 @@ public class makework extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");   //解决乱码所必须的
-        HttpSession ss = request.getSession(true);
         String tt = request.getParameter("work");
         String an = request.getParameter("answer");
         String etime = request.getParameter("etime");
@@ -74,13 +73,9 @@ public class makework extends HttpServlet {
         sdf.applyPattern("yyyy-MM-dd-HH-mm-ss");
         Date date = new Date();
 
-        teacher_bean tea = new teacher_bean();//获取文件路径
-        class_bean cla = new class_bean();
-        tea = (teacher_bean) ss.getAttribute("teacherbean");
-        cla = (class_bean) ss.getAttribute("classbean");
-        String tea_ID = tea.getTea_ID();
-        String cou_ID = cla.getCou_ID();
-        String cla_ID = cla.getClass_ID();
+        String tea_ID = request.getParameter("teaid");//获取文件目录
+        String cou_ID = request.getParameter("couid");
+        String cla_ID = request.getParameter("classid");
 
         File updir = new File(request.getServletContext().getRealPath("/upload/" + tea_ID + "/" + cou_ID + "/" + cla_ID));//判断有没有这个班级的文件夹
         if (!updir.exists()) {
@@ -126,8 +121,7 @@ public class makework extends HttpServlet {
         } catch (Exception e) {
 
         }
-        PrintWriter out = response.getWriter();
-        out.println("<html><body>发布成功<br><a href=\"Tea_Homepage.jsp\">返回主页</a></body></html>");
+        response.sendRedirect("makeannounce.jsp?make=yes");
     }
 
     /**

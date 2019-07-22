@@ -39,3 +39,15 @@
         </div>
     </body>
 </html>
+<script>
+
+//取出传回来的参数error并与yes比较
+    var error1 = '<%=request.getParameter("make")%>';
+    if (error1 === 'no') {
+        alert("发布失败!");
+    }
+    if (error1 === 'yes') {
+        confirm("发布成功！");
+    }
+</script>
+

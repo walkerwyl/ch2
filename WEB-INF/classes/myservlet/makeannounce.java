@@ -29,24 +29,20 @@ public class makeannounce extends HttpServlet {
         Date date = new Date();
         String fileName = sdf.format(date) + ".txt";
 
-        teacher_bean tea = new teacher_bean();//获取文件路径
-        class_bean cla = new class_bean();
-        tea = (teacher_bean) ss.getAttribute("TeacherBean");
-        cla = (class_bean) ss.getAttribute("ClassBean");
-        String tea_ID = tea.getTea_ID();
-        String cou_ID = cla.getCou_ID();
-        String cla_ID = cla.getClass_ID();
-
-        File updir = new File(request.getServletContext().getRealPath("/upload/" + tea_ID + "/" + cou_ID + "/" + cla_ID));//判断有没有这个班级的文件夹
+        String tea_ID = request.getParameter("teaid");//获取文件目录
+        String cou_ID = request.getParameter("couid");
+        String cla_ID = request.getParameter("classid");
+        
+        File updir = new File(tea_ID + "/" + cou_ID + "/" + cla_ID);//判断有没有这个班级的文件夹
         if (!updir.exists()) {
             updir.mkdir();
         }
-        File updir2 = new File(request.getServletContext().getRealPath("/upload/" + tea_ID + "/" + cou_ID + "/" + cla_ID + "/announce"));
+        File updir2 = new File(tea_ID + "/" + cou_ID + "/" + cla_ID + "/announce");
         if (!updir2.exists()) {
             updir2.mkdir();
         }
 
-        String filePath = request.getServletContext().getRealPath("/upload/" + tea_ID + "/" + cou_ID + "/" + cla_ID + "/announce/" + fileName);
+        String filePath = "upload/" + tea_ID + "/" + cou_ID + "/" + cla_ID + "/announce/" + fileName;
 
         try {
             writer = new FileWriter(filePath);
@@ -55,9 +51,7 @@ public class makeannounce extends HttpServlet {
             writer.close();
         } catch (Exception e) {
         }
-        PrintWriter out = response.getWriter();
-        out.println(fileName);
-        out.println("<html><body>发布成功<br><a href=\"Tea_Homepage.jsp\">返回主页</a></body></html>");
+        response.sendRedirect("makeannounce.jsp?make=yes");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

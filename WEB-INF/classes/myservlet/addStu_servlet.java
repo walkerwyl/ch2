@@ -30,7 +30,7 @@ public class addStu_servlet extends HttpServlet {
             request.setCharacterEncoding("UTF-8");
             String stu_ID = request.getParameter("stu_ID");
             String stu_name=null,class_ID=null;
-            class_ID = request.getParameter("class_ID");
+            class_ID = request.getParameter("class_id");
             
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://112.74.58.75:3306/OLAS_DB?useUnicode=true&characterEncoding=utf-8", "root", "41710020wys");
@@ -43,7 +43,7 @@ public class addStu_servlet extends HttpServlet {
                 }
             }
             if(rs.isAfterLast()){
-               response.sendRedirect("class_info.jsp?error=yes");
+               response.sendRedirect("info.jsp?error=yes");
             }
             stu_name = rs.getString(1);
             ps = con.prepareStatement("insert into info(Class_ID,Stu_ID,Stu_Name) values(?,?,?)");
@@ -51,12 +51,12 @@ public class addStu_servlet extends HttpServlet {
             ps.setString(2, stu_ID);
             ps.setString(3, stu_name);
             ps.executeUpdate();
-            response.sendRedirect("class_info.jsp?error=no");
+            response.sendRedirect("info.jsp?error=no");
             
 
         } catch (Exception ex) {
             try {
-                response.sendRedirect("class_info.jsp?error=yes");
+                response.sendRedirect("info.jsp?error=yes");
             } catch (IOException ex1) {
                 Logger.getLogger(addStu_servlet.class.getName()).log(Level.SEVERE, null, ex1);
             }
