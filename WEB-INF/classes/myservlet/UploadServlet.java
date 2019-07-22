@@ -26,7 +26,7 @@ public class UploadServlet extends HttpServlet {
             teacher_bean teacher = (teacher_bean)session.getAttribute("TeacherBean");
             String Tea_ID = teacher.getTea_ID();
             String Cou_ID = (String)session.getAttribute("cou_id"); 
-	String fileName = "";
+			String fileName = "";
             
             request.setCharacterEncoding("utf-8");
             response.setCharacterEncoding("utf-8");
@@ -41,7 +41,7 @@ public class UploadServlet extends HttpServlet {
 		}
 
 //            String savePath = "/tmp/uploadFile";
-		session.removeAttribute("cou_id");
+			session.removeAttribute("cou_id");
             //获取上传的文件集合
             Collection<Part> parts = request.getParts();
             //上传单个文件
@@ -89,6 +89,62 @@ public class UploadServlet extends HttpServlet {
 			
 		}
 		catch(Exception e){}
+		
+		boolean isppt = false;
+        String suffixname = null;
+        if (fileName != null && fileName.indexOf(".") != -1) {
+            suffixname = fileName.substring(fileName.indexOf("."));
+            if (suffixname.equals(".ppt")) {
+                isppt = true;
+            }
+        } else {
+            isppt = false;
+        }
+		
+		f = new File( savePath + File.separator + fileName );
+		try {
+            FileInputStream in = new FileInputStream(f);
+            SlideShow ppt = new SlideShow(in);
+            in.close();
+            Dimension pgsize = ppt.getPageSize();
+            org.apache.poi.hslf.model.Slide[] slide = ppt.getSlides();
+			
+            for (int i = 0; i < slide.length; i++) {
+                System.out.print("第" + i + "页。");
+
+                TextRun[] truns = slide[i].getTextRuns();
+                for ( int k=0;k<truns.length;k++){
+                   RichTextRun[] rtruns = truns[k].getRichTextRuns();
+                  for(int l=0;l<rtruns.length;l++){
+                        int index = rtruns[l].getFontIndex();
+                        String name = rtruns[l].getFontName();
+                        rtruns[l].setFontIndex(1);
+                        rtruns[l].setFontName("宋体");
+//                        System.out.println(rtruns[l].getText());
+                   }
+                }
+                BufferedImage img = new BufferedImage(pgsize.width,pgsize.height, BufferedImage.TYPE_INT_RGB);
+
+                Graphics2D graphics = img.createGraphics();
+                graphics.setPaint(Color.BLUE);
+                graphics.fill(new Rectangle2D.Float(0, 0, pgsize.width, pgsize.height));
+                slide[i].draw(graphics);
+
+                // 这里设置图片的存放路径和图片的格式(jpeg,png,bmp等等),注意生成文件路径
+                FileOutputStream out = new FileOutputStream(savePath + File.separator + "ppts/pics/pic_"+ (i + 1) + ".jpg");
+                javax.imageio.ImageIO.write(img, "jpg", out);
+                out.close();
+
+            }
+            //System.out.println("success!!");
+            //return true;
+        } catch (FileNotFoundException e) {
+            //System.out.println(e);
+            // System.out.println("Can't find the image!");
+        } catch (IOException e) {
+        }
+		
+		
 
 
             }else {

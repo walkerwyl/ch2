@@ -49,7 +49,7 @@
                     String Cou_ID = request.getParameter("couid");
                     String Sou_Name = request.getParameter("souname");
                     
-                    String path = request.getServletContext().getRealPath("/") + "upload/"+Tea_ID+"/"+Cou_ID+"/source/"+Sou_Name+".txt";
+                    String path = request.getServletContext().getRealPath("/") + "upload/"+Tea_ID+"/"+Cou_ID+"/source/"+Sou_Name;
                     
                     FileReader reader = new FileReader(path);
                     BufferedReader bufferedReader = new BufferedReader(reader);

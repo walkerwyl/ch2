@@ -7,8 +7,8 @@ public class teacher_bean {
     String Name,Tea_ID;
     int Gender;
     
-    public Set sources = new HashSet();
-    public Set classes = new HashSet();
+//    public Set sources = new HashSet();
+//    public Set classes = new HashSet();
 
     public String getName() {
         return Name;
@@ -34,19 +34,20 @@ public class teacher_bean {
         this.Gender = Gender;
     }
 
-    public Set getSources() {
-        return sources;
-    }
+//    public Set getSources() {
+//        return sources;
+//    }
 
-    public void setSources(Set sources) {
-        this.sources = sources;
-    }
+//    public void setSources(Set sources) {
+//        this.sources = sources;
+//    }
 
-    public Set getClasses() {
-        return classes;
-    }
+//    public Set getClasses() {
+//        return classes;
+//    }
 
-    public void setClasses(Set classes) {
-        this.classes = classes;
-    }
+//    public void setClasses(Set classes) {
+//    this.classes = classes;
+//    }
+
 }

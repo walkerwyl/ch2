@@ -22,9 +22,6 @@
         <title>JSP Page</title>
         <!--适配手机-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        <link rel="shortcut icon" href="http://admin.zrstt.cn/group1/M00/00/00/rB_YCFsQ_OmAP6VFAAAQvtuENdk882.ico">
-        <!--使用bootstrap的样式，比较好看-->
-        <link href="http://cdn.bootcss.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
         <style>
             h1 {
                 font-family: Consolas, monaco, monospace;
@@ -42,8 +39,7 @@
     </head>
     <body>
         <%
-            //HttpSession ss = request.getSession(true);//获取路径
-            String class_ID = request.getParameter("classid");
+            String class_ID = request.getParameter("classid");//获取路径
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://112.74.58.75:3306/OLAS_DB?useUnicode=true&characterEncoding=utf-8", "root", "41710020wys");
             PreparedStatement ps = con.prepareStatement("select * from class where Class_ID=?");

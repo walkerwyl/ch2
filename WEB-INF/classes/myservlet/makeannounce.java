@@ -11,8 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import mybean.class_bean;
-import mybean.teacher_bean;
 
 public class makeannounce extends HttpServlet {
 
@@ -32,17 +30,18 @@ public class makeannounce extends HttpServlet {
         String tea_ID = request.getParameter("teaid");//获取文件目录
         String cou_ID = request.getParameter("couid");
         String cla_ID = request.getParameter("classid");
+	String p = request.getParameter("p");
         
-        File updir = new File(tea_ID + "/" + cou_ID + "/" + cla_ID);//判断有没有这个班级的文件夹
-        if (!updir.exists()) {
+        File updir = new File(p + "upload/" + tea_ID + "/" + cou_ID + "/" + cla_ID);//判断有没有这个班级的文件夹
+        if (!updir.exists() && !updir.isDirectory()) {
             updir.mkdir();
         }
-        File updir2 = new File(tea_ID + "/" + cou_ID + "/" + cla_ID + "/announce");
-        if (!updir2.exists()) {
+        File updir2 = new File(p + "upload/" + tea_ID + "/" + cou_ID + "/" + cla_ID + "/announce");
+        if (!updir2.exists() && !updir2.isDirectory()) {
             updir2.mkdir();
         }
 
-        String filePath = "upload/" + tea_ID + "/" + cou_ID + "/" + cla_ID + "/announce/" + fileName;
+        String filePath = p + "upload/" + tea_ID + "/" + cou_ID + "/" + cla_ID + "/announce/" + fileName;
 
         try {
             writer = new FileWriter(filePath);

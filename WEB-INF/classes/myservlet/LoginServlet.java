@@ -57,30 +57,30 @@ public class LoginServlet extends HttpServlet {
                         ps.setInt(1, Integer.parseInt(id));
                         rs = ps.executeQuery();
                         
-                        while(rs.next()){
-                            source_bean source = new source_bean();
-                            source.setTea_ID(rs.getString(1));
-                            source.setCou_ID(rs.getString(2));
-                            source.setType(rs.getInt(3));
-                            source.setSou_ID(rs.getString(4));
-                            source.setSum_Count(rs.getInt(5));
-                            source.setSou_Name(rs.getString(6));
+//                        while(rs.next()){
+//                           source_bean source = new source_bean();
+//                            source.setTea_ID(rs.getString(1));
+//                            source.setCou_ID(rs.getString(2));
+//                            source.setType(rs.getInt(3));
+//                            source.setSou_ID(rs.getString(4));
+//                            source.setSum_Count(rs.getInt(5));
+//                            source.setSou_Name(rs.getString(6));
 //                            source.setShare(rs.getInt(7));
-                            tea.sources.add(source);
-                        }
+//                            tea.sources.add(source);
+//                        }
                         
-                        ps = DB.dbCon().prepareStatement("select * from class where Tea_ID=?");
-                        ps.setInt(1, Integer.parseInt(id));
-                        rs = ps.executeQuery();
+//                        ps = DB.dbCon().prepareStatement("select * from class where Tea_ID=?");
+//                        ps.setInt(1, Integer.parseInt(id));
+//                        rs = ps.executeQuery();
                         
-                        while(rs.next()){
-                            class_bean class1 = new class_bean();
-                            class1.setCou_ID(rs.getString(1));
-                            class1.setClass_ID(rs.getString(2));
-                            class1.setCou_Name(rs.getString(3));
-                            class1.setTea_ID(rs.getString(4));
-                            tea.classes.add(class1);
-                        }
+//                        while(rs.next()){
+//                            class_bean class1 = new class_bean();
+//                            class1.setCou_ID(rs.getString(1));
+//                            class1.setClass_ID(rs.getString(2));
+//                            class1.setCou_Name(rs.getString(3));
+//                            class1.setTea_ID(rs.getString(4));
+//                            tea.classes.add(class1);
+//                        }
                         
                         RequestDispatcher dis = request.getRequestDispatcher("Tea_Homepage.jsp");
                         dis.forward(request, response);

@@ -116,9 +116,9 @@
 <script>
 
 //取出传回来的参数error并与yes比较
-    var error1 = '<%=request.getParameter("make")%>';
+    var error1 = '<%=request.getParameter("m")%>';
     if (error1 === 'no') {
-        alert("发布失败!");
+        alert("已经发过三次作业了!");
     }
     if (error1 === 'yes') {
         confirm("发布成功！");

@@ -132,11 +132,13 @@ public class createClass extends HttpServlet {
                     break;
                 }
             }
-            response.sendRedirect("Tea_Homepage.jsp?create=yes");
-        } catch (Exception ex) {
+            response.setCharacterEncoding("utf-8");
+            response.getWriter().print("<script>confirm('创建成功！');window.location='Tea_Homepage.jsp';</script>");        
+} catch (Exception ex) {
            try {
-                response.sendRedirect("Tea_Homepage.jsp?create=no");
-            } catch (IOException ex1) {
+               response.setCharacterEncoding("utf-8");
+            response.getWriter().print("<script>confirm('创建成功！');window.location='Tea_Homepage.jsp';</script>");           
+ } catch (IOException ex1) {
                 Logger.getLogger(createClass.class.getName()).log(Level.SEVERE, null, ex1);
             }
            

@@ -1,7 +1,5 @@
 package myservlet;
 
-import mybean.class_bean;
-import mybean.teacher_bean;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -61,10 +59,12 @@ public class makework extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");   //解决乱码所必须的
+        HttpSession ss = request.getSession(true);
         String tt = request.getParameter("work");
         String an = request.getParameter("answer");
         String etime = request.getParameter("etime");
         FileWriter writer;
+        String m = "yes";
 
         String[] etimes = etime.split("\\-|\\s|:");//设置的截止时间
         etime = etimes[0] + "-" + etimes[1] + "-" + etimes[2] + "-" + etimes[3] + "-" + etimes[4] + "-" + etimes[5];
@@ -76,30 +76,31 @@ public class makework extends HttpServlet {
         String tea_ID = request.getParameter("teaid");//获取文件目录
         String cou_ID = request.getParameter("couid");
         String cla_ID = request.getParameter("classid");
+	String p = request.getParameter("p");
 
-        File updir = new File(request.getServletContext().getRealPath("/upload/" + tea_ID + "/" + cou_ID + "/" + cla_ID));//判断有没有这个班级的文件夹
-        if (!updir.exists()) {
+        File updir = new File(p + "upload/" + tea_ID + "/" + cou_ID + "/" + cla_ID);//判断有没有这个班级的文件夹
+        if (!updir.exists() && !updir.isDirectory()) {
             updir.mkdir();
         }
 
         String mm = "work1";
-        String path = request.getServletContext().getRealPath("/upload/" + tea_ID + "/" + cou_ID + "/" + cla_ID + "/" + mm);
+        String path = p + "upload/" + tea_ID + "/" + cou_ID + "/" + cla_ID + "/" + mm;
         File updir2 = new File(path);
-        if (!updir2.exists()) {
+        if (!updir2.exists() && !updir2.isDirectory()) {
             updir2.mkdir();
         } else {
             mm = "work2";
         }
         File updir3 = new File(path);
-        if (!updir3.exists()) {
+        if (!updir3.exists() && !updir3.isDirectory()) {
             updir3.mkdir();
         } else {
             mm = "work3";
         }
         File updir4 = new File(path);
-        if (!updir4.exists()) {
+        if (!updir4.exists() && !updir4.isDirectory()) {
             updir4.mkdir();
-        }
+        } 
 
         String filePath = path + "/work.txt";//得到文件路径和名称组合
         String filePath2 = path + "/answer.txt";
@@ -121,7 +122,7 @@ public class makework extends HttpServlet {
         } catch (Exception e) {
 
         }
-        response.sendRedirect("makeannounce.jsp?make=yes");
+        response.sendRedirect("makework.jsp?m=yes");
     }
 
     /**

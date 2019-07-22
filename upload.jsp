@@ -19,7 +19,7 @@
 	request.getSession().setAttribute("cou_id", Cou_ID);
 	%>
             <legend>上传单个文件</legend>
-            <form action="UploadServlet" method="post" enctype="multipart/form-data">
+            <form action="newUploadServlet" method="post" enctype="multipart/form-data">
                 上传文件：
                 <input type="file" name="file"><br>
                 <input type="submit" value="上传">

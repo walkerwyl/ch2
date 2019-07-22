@@ -12,7 +12,7 @@
                 String Cou_ID = request.getParameter("couid");
                 String Sou_Name = request.getParameter("souname");
                     
-                String path = "upload/"+Tea_ID+"/"+Cou_ID+"/source/"+Sou_Name+".mp4";
+                String path = "upload/"+Tea_ID+"/"+Cou_ID+"/source/"+Sou_Name;
         %>
             <video src=<%=path%> controls="controls">
             Your browser does'n support video
