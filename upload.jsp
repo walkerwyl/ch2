@@ -1,8 +1,7 @@
-<%@page import="java.util.Iterator"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="mybean.class_bean"%>
 <%@page import="mybean.teacher_bean"%>
 <%@page import="mybean.source_bean"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <jsp:useBean id="TeacherBean" type="mybean.teacher_bean" scope="session"/>
 <!DOCTYPE html>
@@ -26,6 +25,7 @@
             </form>
         </fieldset>
         <br/>
+		<!--
         <fieldset>
             <legend>上传多个文件</legend>
             <form action="UploadServlet" method="post" enctype="multipart/form-data">
@@ -36,9 +36,7 @@
                 <input type="submit" value="上传">
             </form>
         </fieldset>
-	<%
-		
-	%>
+		-->
     </body>
 </html>
 

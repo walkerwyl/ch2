@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -64,50 +62,54 @@ public class makework extends HttpServlet {
         String an = request.getParameter("answer");
         String etime = request.getParameter("etime");
         FileWriter writer;
-        String m = "yes";
 
-        String[] etimes = etime.split("\\-|\\s|:");//设置的截止时间
+        String[] etimes = etime.split("\\-|\\s|:");//设置的截止时间改格式
         etime = etimes[0] + "-" + etimes[1] + "-" + etimes[2] + "-" + etimes[3] + "-" + etimes[4] + "-" + etimes[5];
-
-        SimpleDateFormat sdf = new SimpleDateFormat();//当前的系统时间
-        sdf.applyPattern("yyyy-MM-dd-HH-mm-ss");
-        Date date = new Date();
 
         String tea_ID = request.getParameter("teaid");//获取文件目录
         String cou_ID = request.getParameter("couid");
         String cla_ID = request.getParameter("classid");
-	String p = request.getParameter("p");
-
-        File updir = new File(p + "upload/" + tea_ID + "/" + cou_ID + "/" + cla_ID);//判断有没有这个班级的文件夹
-        if (!updir.exists() && !updir.isDirectory()) {
-            updir.mkdir();
-        }
-
-        String mm = "work1";
-        String path = p + "upload/" + tea_ID + "/" + cou_ID + "/" + cla_ID + "/" + mm;
-        File updir2 = new File(path);
-        if (!updir2.exists() && !updir2.isDirectory()) {
-            updir2.mkdir();
-        } else {
-            mm = "work2";
-        }
-        File updir3 = new File(path);
-        if (!updir3.exists() && !updir3.isDirectory()) {
-            updir3.mkdir();
-        } else {
-            mm = "work3";
-        }
-        File updir4 = new File(path);
-        if (!updir4.exists() && !updir4.isDirectory()) {
-            updir4.mkdir();
-        } 
-
-        String filePath = path + "/work.txt";//得到文件路径和名称组合
-        String filePath2 = path + "/answer.txt";
-        String filePath3 = path + "/time.txt";
+        String path = request.getServletContext().getRealPath("/upload/" + tea_ID + "/" + cou_ID + "/" + cla_ID);//获取路径
 
         try {
-            writer = new FileWriter(filePath);//写文件
+            File dir = new File(path + "/work1");//创建三个work文件夹
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+            File dir2 = new File(path + "/work2");
+            if (!dir2.exists()) {
+                dir2.mkdirs();
+            }
+            File dir3 = new File(path + "/work3");
+            if (!dir3.exists()) {
+                dir3.mkdirs();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        String mm = "work1";//从work1开始判断，如果不为空就到下一个文件夹
+        File backfile = new File(path + "/" + mm);
+        if (backfile != null && backfile.exists() && backfile.isDirectory()) {
+            File[] files = backfile.listFiles();
+            if (files != null && files.length > 0) {
+                mm = "work2";
+            }
+        }
+        backfile = new File(path + "/" + mm);
+        if (backfile != null && backfile.exists() && backfile.isDirectory()) {
+            File[] files = backfile.listFiles();
+            if (files != null && files.length > 0) {
+                mm = "work3";
+            }
+        }
+
+        String filePath1 = path + "/" + mm + "/work.txt";//得到文件路径和名称组合
+        String filePath2 = path + "/" + mm + "/answer.txt";
+        String filePath3 = path + "/" + mm + "/time.txt";
+
+        try {
+            writer = new FileWriter(filePath1);//写文件
             writer.write(tt);
             writer.flush();
             writer.close();

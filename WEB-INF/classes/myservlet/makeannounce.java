@@ -3,7 +3,6 @@ package myservlet;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.servlet.ServletException;
@@ -30,18 +29,18 @@ public class makeannounce extends HttpServlet {
         String tea_ID = request.getParameter("teaid");//获取文件目录
         String cou_ID = request.getParameter("couid");
         String cla_ID = request.getParameter("classid");
-	String p = request.getParameter("p");
-        
-        File updir = new File(p + "upload/" + tea_ID + "/" + cou_ID + "/" + cla_ID);//判断有没有这个班级的文件夹
-        if (!updir.exists() && !updir.isDirectory()) {
-            updir.mkdir();
-        }
-        File updir2 = new File(p + "upload/" + tea_ID + "/" + cou_ID + "/" + cla_ID + "/announce");
-        if (!updir2.exists() && !updir2.isDirectory()) {
-            updir2.mkdir();
+        String path = request.getServletContext().getRealPath("/upload/" + tea_ID + "/" + cou_ID + "/" + cla_ID);
+
+        try {
+            File dir = new File(path + "/announce");//创建announce文件夹
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        String filePath = p + "upload/" + tea_ID + "/" + cou_ID + "/" + cla_ID + "/announce/" + fileName;
+        String filePath = path + "/announce/" + fileName;
 
         try {
             writer = new FileWriter(filePath);

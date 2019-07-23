@@ -25,7 +25,6 @@
 
         
         <%
-	    String path = request.getServletContext().getRealPath("/")；
 
             PreparedStatement ps,ps2,ps3;
             ResultSet rs,rs2,rs3;
@@ -41,8 +40,8 @@
                 while(rs2.next()){
                     out.print("<br>班级:"+rs2.getString(2));
                     out.print("    <a href=Class_Homepage.jsp>查看详细信息</a>"); 
-                    out.print("    <a href=makeannounce.jsp?teaid="+ TeacherBean.getTea_ID() + "&couid=" + rs.getString(1) + "&classid=" + rs2.getString(2) + "&p=" + path +">发布通知</a>"); 
-                    out.print("    <a href=makework.jsp?teaid="+ TeacherBean.getTea_ID() + "&couid=" + rs.getString(1) + "&classid=" + rs2.getString(2) + "&p=" + path +">发布作业</a>"); 
+                    out.print("    <a href=makeannounce.jsp?teaid="+ TeacherBean.getTea_ID() + "&couid=" + rs.getString(1) + "&classid=" + rs2.getString(2) + ">发布通知</a>"); 
+                    out.print("    <a href=makework.jsp?teaid="+ TeacherBean.getTea_ID() + "&couid=" + rs.getString(1) + "&classid=" + rs2.getString(2) + ">发布作业</a>"); 
                     out.print("<br><br>");
                 }
                 out.print("<a href=ManageFile.jsp?couid=" + rs.getString(1) + ">管理教学资源</a><br>"); 

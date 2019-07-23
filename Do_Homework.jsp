@@ -2,8 +2,10 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.io.BufferedReader"%>
 <%@page import="java.io.FileReader"%>
+<%@page import="mybean.student_bean"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<jsp:useBean id="StudentBean" type="mybean.student_bean" scope="session"/>
 <html>
 	<head>
 		<meta charset="UTF-8">
@@ -56,6 +58,7 @@
                     String Tea_ID = request.getParameter("teaid");
                     String Cou_ID = request.getParameter("couid");
                     String Class_ID = request.getParameter("classid");
+		    String Stu_ID = request.getParameter("id");
                     
                     String path = request.getServletContext().getRealPath("/") + "upload/"+Tea_ID+"/"+Cou_ID+"/"+Class_ID+"/"+Name+"/work.txt";
                     String timepath = request.getServletContext().getRealPath("/") + "upload/"+Tea_ID+"/"+Cou_ID+"/"+Class_ID+"/"+Name+"/time.txt";
@@ -109,7 +112,13 @@
 		</div>
                 <div class="row">
                     <form action = <%=target%> method="post" >
-                        <textarea name="work" class="bg-success" id="write-text" rows="6"></textarea>
+                        <textarea name="work" class="bg-success" id="write-text" rows="6">
+			public class w<%=Stu_ID%>{
+    				public static void mian(String[] args){
+   
+    				}
+			}
+			</textarea>
                         <input type="submit" value="提交">
                     </form>
 		</div>

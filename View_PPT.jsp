@@ -11,7 +11,7 @@
 		String Tea_ID = request.getParameter("teaid");
                 String Cou_ID = request.getParameter("couid");
                 String Sou_Name = request.getParameter("souname");
-		String[] tmp = Sou_Name.split("//.");		
+		String[] tmp = Sou_Name.split("\\.");		
 
         	String path = request.getServletContext().getRealPath("/") + "upload/"+Tea_ID+"/"+Cou_ID+"/source/"+tmp[0]+"pics";
             try { 

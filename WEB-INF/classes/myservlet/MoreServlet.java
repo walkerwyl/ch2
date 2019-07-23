@@ -40,7 +40,6 @@ public class MoreServlet extends HttpServlet{
         	}
       		out.println("</table>");
       		out.println("<a href=Tea_Homepage.jsp>回到教师主页面</a>");
-//      		out.println("<a href=ManageFile.jsp>回到ManageFile.jsp页面</a>");
       		out.println("</body></html>");
     	}
 	catch(Exception e){}

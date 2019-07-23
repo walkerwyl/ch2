@@ -133,11 +133,11 @@ public class createClass extends HttpServlet {
                 }
             }
             response.setCharacterEncoding("utf-8");
-            response.getWriter().print("<script>confirm('创建成功！');window.location='Tea_Homepage.jsp';</script>");        
+            response.getWriter().print("<script type='text/javascript' charset='UTF-8'>confirm('success');window.location='Tea_Homepage2.jsp';</script>");        
 } catch (Exception ex) {
            try {
                response.setCharacterEncoding("utf-8");
-            response.getWriter().print("<script>confirm('创建成功！');window.location='Tea_Homepage.jsp';</script>");           
+            response.getWriter().print("<script type='text/javascript' charset='UTF-8'>alert('failed');window.location='Tea_Homepage2.jsp';</script>");           
  } catch (IOException ex1) {
                 Logger.getLogger(createClass.class.getName()).log(Level.SEVERE, null, ex1);
             }

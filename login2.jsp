@@ -18,7 +18,12 @@
         <link rel="stylesheet" href="https://www.layui.com/admin/std/dist/layuiadmin/style/login.css" media="all">
 
     </head>
-    <body>
+
+
+
+    <body background='pic/bg2.jpg'>
+
+        <div class="bodystyle"></div>
         <form action="LoginServlet" method="post">
             <div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login" style="display: none;">
                 <div class="layadmin-user-login-main">

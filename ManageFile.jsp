@@ -14,7 +14,7 @@
         <title>ManageFile Page</title>
     </head>
     <body>
-<h2>资源所属课程:</h2><%=request.getParameter("couid")%>
+<h2>资源所属课程:</h2><!--request.getParameter("couid")-->
 
 <table>
     <tr>

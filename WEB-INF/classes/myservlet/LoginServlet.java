@@ -1,10 +1,10 @@
 package myservlet;
 
-import mybean.student_bean;
-import mybean.teacher_bean;
+import mybean.info_bean;
 import mybean.class_bean;
 import mybean.source_bean;
-import mybean.info_bean;
+import mybean.student_bean;
+import mybean.teacher_bean;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -57,32 +57,8 @@ public class LoginServlet extends HttpServlet {
                         ps.setInt(1, Integer.parseInt(id));
                         rs = ps.executeQuery();
                         
-//                        while(rs.next()){
-//                           source_bean source = new source_bean();
-//                            source.setTea_ID(rs.getString(1));
-//                            source.setCou_ID(rs.getString(2));
-//                            source.setType(rs.getInt(3));
-//                            source.setSou_ID(rs.getString(4));
-//                            source.setSum_Count(rs.getInt(5));
-//                            source.setSou_Name(rs.getString(6));
-//                            source.setShare(rs.getInt(7));
-//                            tea.sources.add(source);
-//                        }
-                        
-//                        ps = DB.dbCon().prepareStatement("select * from class where Tea_ID=?");
-//                        ps.setInt(1, Integer.parseInt(id));
-//                        rs = ps.executeQuery();
-                        
-//                        while(rs.next()){
-//                            class_bean class1 = new class_bean();
-//                            class1.setCou_ID(rs.getString(1));
-//                            class1.setClass_ID(rs.getString(2));
-//                            class1.setCou_Name(rs.getString(3));
-//                            class1.setTea_ID(rs.getString(4));
-//                            tea.classes.add(class1);
-//                        }
-                        
-                        RequestDispatcher dis = request.getRequestDispatcher("Tea_Homepage.jsp");
+                       
+                        RequestDispatcher dis = request.getRequestDispatcher("Tea_Homepage2.jsp");
                         dis.forward(request, response);
                     }
                     

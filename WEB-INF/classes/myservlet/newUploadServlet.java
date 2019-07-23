@@ -88,9 +88,9 @@ public class newUploadServlet extends HttpServlet {
 					ps = DB.dbCon().prepareStatement("INSERT INTO source VALUES(?,?,?,?,?,?,?)");
 					ps.setString(1, Tea_ID);	
 					ps.setString(2, Cou_ID);	
-					ps.setInt(3, 0);
+					ps.setInt(3, newType);
 					ps.setString(4, Integer.toString( maxSou_ID ) );
-					ps.setInt(5, newType);	
+					ps.setInt(5, 0);	
 					ps.setString(6, fileName);	
 					ps.setInt(7, 0);	
 					ps.executeUpdate();
@@ -134,7 +134,6 @@ public class newUploadServlet extends HttpServlet {
 							slide[i].draw(graphics);
 
 							// 这里设置图片的存放路径和图片的格式(jpeg,png,bmp等等),注意生成文件路径
-
 							FileOutputStream out = new FileOutputStream(savePath + File.separator + realName + "pics" + File.separator + "pic_"+ (i + 1) + ".jpg");
 							javax.imageio.ImageIO.write(img, "jpg", out);
 							out.close();
@@ -152,7 +151,7 @@ public class newUploadServlet extends HttpServlet {
 					
 
 				}
-				//IF终止的地方？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
+				//IF终止的地方-----------------------------------------------------------------------------------------------
 
 		
 

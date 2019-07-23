@@ -18,6 +18,7 @@
         性别:<jsp:getProperty name="StudentBean" property="gender"/>
         
         <%
+	    String stuid = StudentBean.getStu_ID();
             PreparedStatement ps1,ps2;
             ResultSet rs1,rs2;
             ps1 = DB.dbCon().prepareStatement("select * from class where Class_ID=?");
@@ -45,13 +46,13 @@
                             out.print(n.getMy_Count());
                             out.print("<PRE>作业1：  成绩：");
                             out.print(n.getWork1());
-                            out.print("  <a href=Do_Homework.jsp?name=work1&teaid="+rs1.getString(4)+"&couid="+rs1.getString(1)+"&classid="+n.getClass_ID()+">写作业</a>");
+                            out.print("  <a href=Do_Homework.jsp?name=work1&teaid="+rs1.getString(4)+"&couid="+rs1.getString(1)+"&classid="+n.getClass_ID()+"&id="+stuid+">写作业</a>");
                             out.print("<br>作业2：  成绩：");
                             out.print(n.getWork2());
-                            out.print("  <a href=Do_Homework.jsp?name=work2&teaid="+rs1.getString(4)+"&couid="+rs1.getString(1)+"&classid="+n.getClass_ID()+">写作业</a>");
+                            out.print("  <a href=Do_Homework.jsp?name=work2&teaid="+rs1.getString(4)+"&couid="+rs1.getString(1)+"&classid="+n.getClass_ID()+"&id="+stuid+">写作业</a>");
                             out.print("<br>作业3：  成绩：");
                             out.print(n.getWork3());
-                            out.print("  <a href=Do_Homework.jsp?name=work3&teaid="+rs1.getString(4)+"&couid="+rs1.getString(1)+"&classid="+n.getClass_ID()+">写作业</a>");
+                            out.print("  <a href=Do_Homework.jsp?name=work3&teaid="+rs1.getString(4)+"&couid="+rs1.getString(1)+"&classid="+n.getClass_ID()+"&id="+stuid+">写作业</a>");
                             out.print("<br><a href=readannounce.jsp?classid=");
 							out.print(rs1.getString(2));
 							out.print(">查看通知</a>");

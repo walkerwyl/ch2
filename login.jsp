@@ -58,12 +58,6 @@
                             <input type="reset"  style="width:60px;height:30px;vertical-align:middle;margin:8px;line-height:18px;font-size:18px;" value="清空"/>
                         </td>
                     </tr>
-                    <tr>
-                        <th>  </th>
-                        <td>
-                            <a href="Register.jsp"><font size="3" color="black" >新用户，请先注册</font></a>
-                        </td>
-                    </tr>
                 </tbody>
             </table>
 
