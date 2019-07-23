@@ -25,10 +25,15 @@
         </style>
     </head>
     <body>
+        <%
+            String teaid = request.getParameter("teaid");//获取传递过来的参数
+            String couid = request.getParameter("couid");
+            String classid = request.getParameter("classid");
+        %>
         <div class="row">
             <div class="col-md-6">
                 <h1>编辑要发布的通知内容：</h1>            
-                <form method="post" action="makeannounce?teaid=<% request.getParameter("teaid");%>&couid=<% request.getParameter("couid");%>&classid=<% request.getParameter("classid");%>">
+                <form method="post" action="makeannounce?teaid=<%=teaid%>&couid=<%=couid%>&classid=<%=classid%>">
                     <textarea  name="ann" cols="80" rows="20">Start here.</textarea>
                     <br>
                     <input type="submit" style="height:20px;width:40px" value="发布"/>

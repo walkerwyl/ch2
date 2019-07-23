@@ -21,7 +21,7 @@
 
 
 
-    <body background='pic/bg2.jpg'>
+    <body background='pic/bg2.png'>
 
         <div class="bodystyle"></div>
         <form action="LoginServlet" method="post">

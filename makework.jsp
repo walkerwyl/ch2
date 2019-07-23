@@ -77,9 +77,15 @@
         </script>
     </head>
     <body>
+        <%
+            String teaid = request.getParameter("teaid");//获取传递过来的参数
+            String couid = request.getParameter("couid");
+            String classid = request.getParameter("classid");
+        %>
+
         <div class="row">
             <div class="col-md-6">
-                <form method="post" action="makework?teaid=<% request.getParameter("teaid");%>&couid=<% request.getParameter("couid");%>&classid=<% request.getParameter("classid");%>">
+                <form method="post" action="makework?teaid=<%=teaid%>&couid=<%=couid%>&classid=<%=classid%>">
                     <h1>编辑要发布的作业内容：</h1>             
                     <textarea name="work"class="bg-success" id="text-input"  oninput="this.editor.update()" rows="6">Type **Markdown** here.</textarea>
                     <h1>设置作业有效时段</h1>
