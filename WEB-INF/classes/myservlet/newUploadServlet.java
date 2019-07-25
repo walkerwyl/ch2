@@ -44,6 +44,7 @@ public class newUploadServlet extends HttpServlet {
             String Tea_ID = teacher.getTea_ID();
             String Cou_ID = (String)session.getAttribute("cou_id"); 
 			String fileName = "";
+				String[] tmp = new String[3];
             
             request.setCharacterEncoding("utf-8");
             response.setCharacterEncoding("utf-8");
@@ -64,13 +65,13 @@ public class newUploadServlet extends HttpServlet {
                 fileName = getFileName(header);
                 part.write(savePath+File.separator+fileName);
 
-				String[] tmp = fileName.split("\\.");
+				 tmp = fileName.split("\\.");
 				String realName = tmp[0];
 				//创建保存PPT图片的文件夹
 				int newType = 3;
-				if(tmp[1] == "txt"){		newType = 0;}
-				else if(tmp[1] == "mp4"){	newType = 2;}
-				else{				newType = 1;}
+				if(tmp[1].equals("txt")){	newType = 0;}
+				if(tmp[1].equals("mp4")){	newType = 2;}
+				if(tmp[1].equals("ppt")){	newType = 1;}
 
 				try{
 					PreparedStatement ps = DB.dbCon().prepareStatement("SELECT * FROM source");
@@ -171,6 +172,9 @@ public class newUploadServlet extends HttpServlet {
             PrintWriter out = response.getWriter();
             out.println("上传成功");
             out.println(fileName);
+//            out.println(tmp[0]);
+//            out.println(tmp[1]);
+		out.println("<a href=Tea_Homepage.jsp>Return to Tea_Homepage.jsp</a>");
             out.flush();
             out.close();
     }

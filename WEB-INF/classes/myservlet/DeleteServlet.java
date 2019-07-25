@@ -23,27 +23,30 @@ public class DeleteServlet extends HttpServlet{
 	HttpSession session = request.getSession();
 	teacher_bean teacher = (teacher_bean) session.getAttribute("TeacherBean");
 
-	String tea_id = teacher.getTea_ID(); 
-	String cou_id = (String) request.getParameter("Cou_ID");
-	String sou_name = (String) request.getParameter("Sou_Name");
-	String deletePath = request.getServletContext().getRealPath( "/upload/" + tea_id + "/" + cou_id + "/source/" + sou_name );
+	String teaid = teacher.getTea_ID(); 
+	String couid = (String) request.getParameter("Cou_ID");
+	String souname = (String) request.getParameter("Sou_Name");
+	String deletePath = request.getServletContext().getRealPath( "/upload/" + teaid + "/" + couid + "/source/" + souname );
     //首先从数据库中删除对应的数据，然后从老师资源库中删除对应的文件
     try{
       	PreparedStatement ps;
       	ps = DB.dbCon().prepareStatement("DELETE FROM source WHERE Sou_Name=?");
-	ps.setString(1,sou_name);
-	ps.executeUpdate();
+		ps.setString(1,souname);
+		ps.executeUpdate();
 
-	deleteFile(deletePath);
+		deleteFile(deletePath);
 
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        out.println("<html><body>");
-        out.println("Sou_Name=" + sou_name+ "的资源已删除");
-	out.println(deletePath);
-        out.println("<a href=Tea_Homepage.jsp>回到教师主页面</a>");
-        out.println("<a href=ManageFile.jsp>回到ManageFile.jsp页面</a>");
-        out.println("</html></body>");
+        //response.setContentType("text/html;charset=UTF-8");
+        //PrintWriter out = response.getWriter();
+        //out.println("<html><body>");
+        //out.println("Sou_Name=" + sou_name+ "的资源已删除");
+		//out.println(deletePath);
+        //out.println("<a href=Tea_Homepage.jsp>回到教师主页面</a>");
+        //out.println("<a href=ManageFile.jsp>回到ManageFile.jsp页面</a>");
+        //out.println("</html></body>");
+		//RequestDispatcher dispatcher = request.getRequestDispatcher("ManageFile.jsp?couid="+couid);
+		//dispatcher.forward(request, response);
+		response.getWriter().print("<script type='text/javascript' charset='UTF-8'>confirm(删除成功);windows.location='ManageFile.jsp?couid="+ couid +"'</script>");
 
     }
     catch(Exception e){}

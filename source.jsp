@@ -1,4 +1,4 @@
- <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+﻿ <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,7 +70,7 @@
 	  table.render({
 	    elem: '#dg'
 	    ,toolbar: true
-	    ,url: '${pageContext.request.contextPath}/source?tea_id=41710020&type=3' //数据接口
+	    ,url: '${pageContext.request.contextPath}/source?' //数据接口
 	    ,cols: [[ //表头
 	      {type: 'checkbox', fixed: 'left'}
 	      ,{title: '序号', width:80, type:'numbers',fixed: 'left'}
@@ -84,17 +84,17 @@
 	      // ,{field: 'sou_name', title: '作业资源名称', width:80}
 	      ,{title: '作业1', width:80,
 	    	 templet: function(d){
-	    	    return '<a style="text-decoration:underline;" href="'+'${pageContext.request.contextPath}/upload/'+d.tea_id+'/'+d.cou_id+'/work1/'+d.stu_id+'.txt'+'" target="_blank">作业1</a>' ;
+	    	    return '<a style="text-decoration:underline;" href="'+'${pageContext.request.contextPath}/upload/'+d.tea_id+'/'+d.cou_id+'/'+d.class_id+'/work1/'+d.stu_id+'.txt'+'" target="_blank">作业1</a>' ;
 	    	 }
 	      }
 	      ,{title: '作业2', width:80,
 		    	 templet: function(d){
-		    	    return '<a style="text-decoration:underline;" href="'+'${pageContext.request.contextPath}/upload/'+d.tea_id+'/'+d.cou_id+'/work2/'+d.stu_id+'.txt'+'" target="_blank">作业2</a>' ;
+		    	    return '<a style="text-decoration:underline;" href="'+'${pageContext.request.contextPath}/upload/'+d.tea_id+'/'+d.cou_id+d.class_id+'/work2/'+d.stu_id+'.txt'+'" target="_blank">作业2</a>' ;
 		    	 }
 		   }
 	      ,{title: '作业3', width:80,
 		    	 templet: function(d){
-		    	    return '<a style="text-decoration:underline;" href="'+'${pageContext.request.contextPath}/upload/'+d.tea_id+'/'+d.cou_id+'/work3/'+d.stu_id+'.txt'+'" target="_blank">作业3</a>' ;
+		    	    return '<a style="text-decoration:underline;" href="'+'${pageContext.request.contextPath}/upload/'+d.tea_id+'/'+d.cou_id+d.class_id+'/work3/'+d.stu_id+'.txt'+'" target="_blank">作业3</a>' ;
 		    	 }
 		  }
 	      

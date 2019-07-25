@@ -21,7 +21,17 @@
                 font-weight: 500;
                 line-height: 23px;
             }
-
+            .class1{
+                border-radius:5px;
+                border:2px;
+                width: 40pt;
+                height: 25pt;
+                color:white;
+                background-color: #1e9eff;
+                font-size:13px;
+                padding: 10px;
+                resize: none;
+            }
             #text-input {
                 margin-left: 3%;
                 padding: 15px;
@@ -30,7 +40,6 @@
                 border: none;
                 resize: none;
             }
-
             #preview {
                 margin-left: 3%;
                 padding: 15px;
@@ -76,7 +85,7 @@
             }
         </script>
     </head>
-    <body>
+    <body style="background-color:rgba(241,241,241,.98)">
         <%
             String teaid = request.getParameter("teaid");//获取传递过来的参数
             String couid = request.getParameter("couid");
@@ -86,24 +95,23 @@
         <div class="row">
             <div class="col-md-6">
                 <form method="post" action="makework?teaid=<%=teaid%>&couid=<%=couid%>&classid=<%=classid%>">
-                    <h1>编辑要发布的作业内容：</h1>             
+                    <h1>&emsp;&emsp;编辑要发布的作业内容：</h1><br>             
                     <textarea name="work"class="bg-success" id="text-input"  oninput="this.editor.update()" rows="6">Type **Markdown** here.</textarea>
-                    <h1>设置作业有效时段</h1>
-                    截止时间：<input name="etime" type="text" value="2019-7-19 17:06:00" onkeyup="showFormat(this)"/>
+                    <h1>&emsp;&emsp;设置作业有效时段:</h1>
+                    &emsp;&emsp;截止时间：<input name="etime" type="text" value="2019-7-19 17:06:00" onkeyup="showFormat(this)"/>
                     <div id="divMessage"></div>
             </div>
             <div class="col-md-6">
-                <h1>预览效果：</h1>
-                <div id="preview" class="bg-primary" rows="6"> </div><br>
-                请提供一个参考答案：<input type="text" name="answer" value="" />
+                <h1>&emsp;&emsp;预览效果：<br><br>
+                    <div id="preview" class="bg-primary" rows="6"> </div><br>
+                    &emsp;&emsp;请提供一个参考答案：<input type="text" name="answer" value="" />
+                </h1>
             </div>
-            <input type="submit" style="height:20px;width:40px" value="发布"/>
-            <br/>
-            <a href="Tea_Homepage.jsp">取消并返回</a>
+            &emsp;&emsp;&emsp;<input type="submit" class="class1" value="发布"/>
+            <a href="Tea_Homepage2.jsp">取消并返回主页</a>
         </div>
     </form>
     <script src="https://cdn.bootcss.com/markdown.js/0.5.0/markdown.min.js"></script>
-
     <script>
                         function Editor(input, preview) {
                             this.update = function () {
@@ -120,7 +128,6 @@
 </body>
 </html>
 <script>
-
 //取出传回来的参数error并与yes比较
     var error1 = '<%=request.getParameter("m")%>';
     if (error1 === 'no') {

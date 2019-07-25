@@ -29,24 +29,30 @@ public class HomeworkServlet extends HttpServlet {
         FileWriter writer;
 
 	student_bean stu = (student_bean)ss.getAttribute("StudentBean");
+	String isovertime = request.getParameter("isovertime");
         String Tea_ID = request.getParameter("teaid");
         String Cou_ID = request.getParameter("couid");
         String Class_ID = request.getParameter("classid");
         String workname = request.getParameter("workname");
 
-        String fileName = stu.getStu_ID + ".txt";
+	if(isovertime.equals("false")){
+	
+        	String fileName = stu.getStu_ID() + ".txt";
 
-        String filePath = request.getServletContext().getRealPath("/") + "upload/"+Tea_ID+"/"+Cou_ID+"/"+Class_ID+"/"+workname+"/"+fileName;
-        try {
-            writer = new FileWriter(filePath);
-            writer.write(tt);
-            writer.flush();
-            writer.close();
-        } catch (Exception e) {
-        }
-        RequestDispatcher dis = request.getRequestDispatcher("uploadhomework.jsp");
-        dis.forward(request, response);
-    }
+        	String filePath = request.getServletContext().getRealPath("/") + "upload/"+Tea_ID+"/"+Cou_ID+"/"+Class_ID+"/"+workname+"/"+fileName;
+        	try {
+            		writer = new FileWriter(filePath);
+            		writer.write(tt);
+            		writer.flush();
+            		writer.close();
+        	} catch (Exception e) {
+        	}
+		response.getWriter().print("<script type='text/javascript' charset='UTF-8'>confirm('success');window.location='Stu_Homepage2.jsp';</script>");
+    	}else{
+		response.getWriter().print("<script type='text/javascript' charset='UTF-8'>confirm('overtime');window.location='Stu_Homepage2.jsp';</script>");
+	}
+	
+}
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

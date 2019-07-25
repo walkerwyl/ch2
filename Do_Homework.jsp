@@ -1,4 +1,4 @@
-<%@page import="java.util.Date"%>
+﻿<%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.io.BufferedReader"%>
 <%@page import="java.io.FileReader"%>
@@ -14,6 +14,17 @@
 		<link rel="shortcut icon" href="http://admin.zrstt.cn/group1/M00/00/00/rB_YCFsQ_OmAP6VFAAAQvtuENdk882.ico">
 		<link href="http://cdn.bootcss.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 		<style>
+		.class1{
+                border-radius:5px;
+                border:2px;
+                width: 40pt;
+                height: 25pt;
+                color:white;
+                background-color: #1e9eff;
+                font-size:13px;
+                padding: 10px;
+                resize: none;
+            	}
 			#text-input {
 				margin-left: 0%;
 				padding: 0px;
@@ -48,11 +59,7 @@
 		</style>
 	</head>
 
-	<body>
-		<center>
-			<h1>MarkDown_Test</h1>
-		</center>
-
+	<body style="background-color:rgba(241,241,241,.98)">
                 <%
                     String Name = request.getParameter("name");
                     String Tea_ID = request.getParameter("teaid");
@@ -79,19 +86,18 @@
                     Date date = new Date();
                     String now = sdf.format(date);
                     
-                    String target = "HomeworkServlet?workname="+Name+"&teaid="+Tea_ID+"&couid="+Cou_ID+"&classid="+Class_ID;
-                    
+                    String isovertime = "true";
+
                     try{
-                        if(sdf.parse(now).getTime()>sdf.parse(end).getTime()){//转成long类型比较
-                            target = "overtime.jsp";
-                        }
-                        else{
-                            target = "HomeworkServlet?workname="+Name+"&teaid="+Tea_ID+"&couid="+Cou_ID+"&classid="+Class_ID;
+                        if(sdf.parse(now).getTime()<sdf.parse(end).getTime()){//转成long类型比较
+                            isovertime = "false";
                         }
                     }catch(Exception e){
                         out.print(e);
                     }
                     
+		    String target = "HomeworkServlet?isovertime="+isovertime+"&workname="+Name+"&teaid="+Tea_ID+"&couid="+Cou_ID+"&classid="+Class_ID;
+
                     FileReader reader = new FileReader(path);
                     BufferedReader bufferedReader = new BufferedReader(reader);
                     StringBuffer txt = new StringBuffer();
@@ -113,13 +119,8 @@
                 <div class="row">
                     <form action = <%=target%> method="post" >
                         <textarea name="work" class="bg-success" id="write-text" rows="6">
-			public class w<%=Stu_ID%>{
-    				public static void mian(String[] args){
-   
-    				}
-			}
 			</textarea>
-                        <input type="submit" value="提交">
+                        <input type="submit" class="class1" value="提交">
                     </form>
 		</div>
 		<script src="https://cdn.bootcss.com/markdown.js/0.5.0/markdown.min.js"></script>

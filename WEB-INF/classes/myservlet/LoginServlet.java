@@ -88,18 +88,21 @@ public class LoginServlet extends HttpServlet {
                             stu.infos.add(info);
                         }
                         
-                        RequestDispatcher dis = request.getRequestDispatcher("Stu_Homepage.jsp");
+                        RequestDispatcher dis = request.getRequestDispatcher("Stu_Homepage2.jsp");
                         dis.forward(request, response);
                     }
                 }else{
                     //rr.setFlag("Wrong id or password!");
-                    RequestDispatcher dis = request.getRequestDispatcher("LoginError.jsp");
-                    dis.forward(request, response);
+                    //RequestDispatcher dis = request.getRequestDispatcher("LoginError.jsp");
+                    //dis.forward(request, response);
+					response.getWriter().print("<script type='text/javascript' charset='UTF-8'>confirm('Wrong id or password');window.location='login2.jsp';</script>");
                 }
             }
             catch(Exception e){};
         }else{
             //rr.setFlag("id or password can not be null");
+			response.getWriter().print("<script type='text/javascript' charset='UTF-8'>confirm('id or password cam't be null');window.location='login2.jsp';</script>");
+
         }
     }
 

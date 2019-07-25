@@ -21,6 +21,7 @@ public class ChangeShareServlet extends HttpServlet{
         throws ServletException, IOException{
 
 	String sou_id = (String) request.getParameter("Sou_ID");
+	String couid = (String) request.getParameter("couid");
 	String tmp = request.getParameter("Share");
 	int share = Integer.parseInt(tmp);
 	try{
@@ -34,7 +35,7 @@ public class ChangeShareServlet extends HttpServlet{
 	}
 	catch(Exception e){}
 
-	RequestDispatcher dispatcher = request.getRequestDispatcher("ManageFile.jsp");
+	RequestDispatcher dispatcher = request.getRequestDispatcher("ManageFile.jsp?couid="+couid);
 	dispatcher.forward(request, response);
   }
 

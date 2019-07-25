@@ -114,6 +114,14 @@
 		<url-pattern>/source</url-pattern>
 	</servlet-mapping>
 
+        <servlet>
+		<servlet-name>calcTime</servlet-name>
+		<servlet-class>myservlet.calcTime</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>calcTime</servlet-name>
+		<url-pattern>/calcTime</url-pattern>
+	</servlet-mapping>
 	
 
     <session-config>

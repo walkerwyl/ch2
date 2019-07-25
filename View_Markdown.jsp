@@ -1,7 +1,9 @@
-<%@page import="java.sql.PreparedStatement"%>
+﻿<%@page import="java.sql.PreparedStatement"%>
 <%@page import="myservlet.DB"%>
 <%@page import="java.io.BufferedReader"%>
 <%@page import="java.io.FileReader"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -37,18 +39,34 @@
 				overflow-x: none;
 			}
 		</style>
+		<script language="javascript" type="text/javascript">
+        function ConfirmClose() {
+                window.event.returnValue = '';
+        }
+ 
+        function ShowConfirmClose(blnValue) {
+                if(blnValue) {
+                        document.body.onbeforeunload = ConfirmClose;
+                } else {
+                        document.body.onbeforeunload = null;
+                }
+        }
+        </script>
 	</head>
 
 	<body>
-		<center>
-			<h1>MarkDown_Test</h1>
-		</center>
-
                 <%
                     String Tea_ID = request.getParameter("teaid");
                     String Cou_ID = request.getParameter("couid");
                     String Sou_Name = request.getParameter("souname");
-                    
+					String souid= request.getParameter("souid");
+					String classid= request.getParameter("classid");
+					
+					SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
+					Date startTime = new Date();
+					String start = df.format(startTime);
+					String target = "calcTime?start=" + start + "&souid=" + souid +"&classid="+ classid;
+					
                     String path = request.getServletContext().getRealPath("/") + "upload/"+Tea_ID+"/"+Cou_ID+"/source/"+Sou_Name;
                     
                     FileReader reader = new FileReader(path);
@@ -62,13 +80,15 @@
                     reader.close();
                     bufferedReader.close();
                 %>
+		<center>
+			<h1><%=Sou_Name%></h1>
+		</center>
+
         
-                资源路径是:<%=path%>
-                
-                <%
-//                    ss.removeAttribute("ID");
-                %>
-                
+        <form action=<%=target%> method="post">
+        	<input type="submit" value="保存并提交进度" onclick="ShowConfirmClose(false);">
+			<input type=button value="打开网页异常关闭提示" onclick="ShowConfirmClose(true);">
+        </form>
 		<div class="row">
                     <textarea class="bg-success" id="text-input" oninput="this.editor.update()" rows="6"><%=txt%></textarea>
                     <div id="preview" class="bg-primary" rows="6"> </div>
