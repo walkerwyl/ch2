@@ -52,9 +52,9 @@
                 <form name="add" action="addStu_servlet" method="post">
                     &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<input type="button" class="layui-btn" value="添加学生" onclick="input()"/>
                     <div id="showDiv" style="display:none;">
-                       <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; <label >输入学生ID</label>
+                       <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; <label >输入学生学号</label>
                         <input type="text" name="stu_ID"/>
-			<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<label >输入班级ID</label>
+			<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<label >输入班级代号</label>
                         <input type="text" name="class_ID"/>
                         &emsp;&emsp;<input type="submit" class="layui-btn layui-btn-normal" value="确定" />
                     </div>

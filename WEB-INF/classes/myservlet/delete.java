@@ -13,7 +13,8 @@ public class delete extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");   //解决乱码所必须
 
         String teaid = (String) request.getParameter("teaid");
         String couid = (String) request.getParameter("couid");
@@ -24,22 +25,10 @@ public class delete extends HttpServlet {
         //首先从数据库中删除对应的数据，然后从老师资源库中删除对应的文件
         try {
             deleteFile(deletePath);
-
-            //response.setContentType("text/html;charset=UTF-8");
-            //PrintWriter out = response.getWriter();
-            //out.println("<html><body>");
-            //out.println("Sou_Name=" + sou_name+ "的资源已删除");
-            //out.println(deletePath);
-            //out.println("<a href=Tea_Homepage.jsp>回到教师主页面</a>");
-            //out.println("<a href=ManageFile.jsp>回到ManageFile.jsp页面</a>");
-            //out.println("</html></body>");
-            //RequestDispatcher dispatcher = request.getRequestDispatcher("ManageFile.jsp?couid="+couid);
-            //dispatcher.forward(request, response);
-            response.getWriter().print("<script type='text/javascript' charset='UTF-8'>confirm(删除成功);windows.location='ManageFile.jsp?couid=" + couid + "'</script>");
-
         } catch (Exception e) {
         }
-        response.sendRedirect("teaHomepage.jsp?");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("makeannounce.jsp?couid=" + couid + "&teaid=" + teaid + "&classid=" + classid);
+        dispatcher.forward(request, response);
     }
 
     public void deleteFile(String path) {

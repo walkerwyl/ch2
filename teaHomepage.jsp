@@ -27,6 +27,11 @@
                         <img src="https://www.layui.com/template/xianyan/demo/res/static/images/logo.png" alt="" class="logo-img"></a>
                     <font face="楷体" color="white">welcome!<jsp:getProperty name="TeacherBean" property="name"/></font>
                 </h3>
+                <h3 class="logo pull-right">
+                    <a href="LogoutServlet">
+                        <img src="pic/logout.jpg" width="35" height="35"/>
+                    </a>
+                </h3>
             </div>
         </div>
         <div class="container - wrap">

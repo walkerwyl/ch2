@@ -61,15 +61,15 @@
                         if (file.isFile()){
 				String picpath = "upload/"+Tea_ID+"/"+Cou_ID+"/source/"+tmp[0]+"pics/pic_"+String.valueOf(j+1)+".jpg";
         %>
-		        <br>page:<%=(j+1)%><br><img src=<%=picpath%> width="70%" >
+		        <br><center>page:<%=(j+1)%><br><img src=<%=picpath%> width="70%" ></center>
 
 <%
 	if(classid != null) {
 %>
 
 			<form action=<%=target%> method="post">
-        			<input type="submit" value="保存并提交进度" class="class1" onclick="ShowConfirmClose(false);">
-				<input type=button value="打开网页异常关闭提示" class="class1" onclick="ShowConfirmClose(true);">
+        			<center><input type="submit" value="保存并提交进度" class="class1" onclick="ShowConfirmClose(false);">
+				<input type=button value="打开网页异常关闭提示" class="class1" onclick="ShowConfirmClose(true);"></center>
            	 	</form>
 
 <%

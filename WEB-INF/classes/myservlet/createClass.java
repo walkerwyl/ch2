@@ -78,18 +78,16 @@ public class createClass extends HttpServlet {
             //连接数据库
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://112.74.58.75:3306/OLAS_DB?useUnicode=true&characterEncoding=UTF-8", "root", "41710020wys");
-            Statement sql = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            PreparedStatement ps = con.prepareStatement("select * from teacher");
             //获取教师ID
             String tea_ID;
             String[] ss = sheet.getRow(3).getCell(3).getStringCellValue().split("：");
             String tea_name = ss[1];//任课教师：name
-            tea_rs = sql.executeQuery("select * from teacher");
-            tea_rs.next();//每个rs即取即用，否则会关闭
-            while (!tea_rs.isLast()) {
+            tea_rs = ps.executeQuery();
+            while (tea_rs.next()) {
                 if (tea_name.equals(tea_rs.getString(1))) {
                     break;
                 }
-                tea_rs.next();
             }
             tea_ID = tea_rs.getString(2);
             tea_rs.close();
@@ -99,22 +97,25 @@ public class createClass extends HttpServlet {
             //课程名称对应ID
             String cou_ID = null, class_ID = null, maxClassID = null;
             //获取课程和班级ID
-            class_rs = sql.executeQuery("select * from class where Cou_Name=" + cou_name);
+            ps=con.prepareStatement("select * from class where Cou_Name=?");
+            ps.setString(1, cou_name);
+            class_rs = ps.executeQuery();
             if (class_rs.next()) {
                 cou_ID = class_rs.getString(1);
             } else {
-                class_rs=sql.executeQuery("select * from class");
-               class_rs.absolute(1);
-		 String maxCouID = class_rs.getString(1);
-                
+                ps=con.prepareStatement("select * from class");
+                class_rs = ps.executeQuery();
+                class_rs.absolute(1);
+                String maxCouID = class_rs.getString(1);
                 while (class_rs.next()) {
                     if (Integer.valueOf(class_rs.getString(1)) >= Integer.valueOf(maxCouID)) {
                         maxCouID = class_rs.getString(1);
                     }
                 }
                 cou_ID = String.valueOf(Integer.valueOf(maxCouID) + 1);
-           }
-            class_rs=sql.executeQuery("select * from class");
+            }
+            ps=con.prepareStatement("select * from class");
+            class_rs = ps.executeQuery();
             class_rs.absolute(1);
             maxClassID = class_rs.getString(2);
             while (class_rs.next()) {
@@ -124,7 +125,7 @@ public class createClass extends HttpServlet {
             }
             class_ID = String.valueOf(Integer.valueOf(maxClassID) + 1);
             //插入信息
-            PreparedStatement ps = con.prepareStatement("insert into class values(?,?,?,?)");
+            ps = con.prepareStatement("insert into class values(?,?,?,?)");
             ps.setString(1, cou_ID);
             ps.setString(2, class_ID);
             ps.setString(3, cou_name);
@@ -148,11 +149,12 @@ public class createClass extends HttpServlet {
             }
             String path = request.getServletContext().getRealPath("/upload/" + tea_ID + "/" + cou_ID + "/" + class_ID);//获取路径
             newfile(path, response);
-            response.getWriter().print(path);
-//response.getWriter().print("<script type='text/javascript' charset='UTF-8'>confirm('success');window.location='teaHomepage.jsp';</script>");
+            // response.getWriter().print(path);
+            response.getWriter().print("<script type='text/javascript' charset='UTF-8'>confirm('success');window.location='teaHomepage.jsp';</script>");
         } catch (Exception ex) {
             try {
-                response.getWriter().print("<script type='text/javascript' charset='UTF-8'>alert('failed');window.location='teaHomepage.jsp';</script>");
+           // response.getWriter().print(ex);
+            response.getWriter().print("<script type='text/javascript' charset='UTF-8'>alert('failed');window.location='teaHomepage.jsp';</script>");
             } catch (IOException ex1) {
                 Logger.getLogger(createClass.class.getName()).log(Level.SEVERE, null, ex1);
             }

@@ -1,9 +1,13 @@
 package myservlet;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -76,7 +80,36 @@ public class write extends HttpServlet {
         } catch (Exception e) {
 
         }
-        response.sendRedirect("write.jsp?m=yes");
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://112.74.58.75:3306/OLAS_DB?useUnicode=true&characterEncoding=utf-8", "root", "41710020wys");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM source");
+            ResultSet rs = ps.executeQuery();
+
+            int maxSou_ID = 1;
+            while (rs.next()) {
+                int tmpSou_ID = Integer.parseInt(rs.getString(4));
+                if (tmpSou_ID > maxSou_ID) {
+                    maxSou_ID = tmpSou_ID;
+                }
+            }
+            maxSou_ID = maxSou_ID + 1;
+
+            ps = con.prepareStatement("INSERT INTO source VALUES(?,?,?,?,?,?,?)");
+            ps.setString(1, tea_ID);
+            ps.setString(2, cou_ID);
+            ps.setInt(3, 0);
+            ps.setString(4, Integer.toString(maxSou_ID));
+            ps.setInt(5, 0);
+            ps.setString(6, title);
+            ps.setInt(7, 0);
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+        }
+        RequestDispatcher dispatcher = request.getRequestDispatcher("ManageFile.jsp?couid=" + cou_ID);
+        dispatcher.forward(request, response);
+
     }
 
     /**

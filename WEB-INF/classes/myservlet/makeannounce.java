@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -49,7 +50,8 @@ public class makeannounce extends HttpServlet {
             writer.close();
         } catch (Exception e) {
         }
-        response.sendRedirect("makeannounce.jsp?make=yes");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("makeannounce.jsp?couid=" + cou_ID+ "&teaid=" + tea_ID + "&classid=" + cla_ID);
+        dispatcher.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -31,17 +31,17 @@
                 resize: none;
             }
             #text-input {
-                margin-left: 10%;
+                margin-left: 30%;
                 padding: 15px;
                 height: 400px;
-                width: 90%;
+                width: 70%;
                 border: none;
                 resize: none;
             }
             #preview {
                 margin-left: 0%;
                 padding: 15px;
-                width: 90%;
+                width: 70%;
                 border: none;
                 height: 400px;
                 overflow-y:auto; 
@@ -61,17 +61,17 @@
         <form method="post" action="write?teaid=<%=teaid%>&couid=<%=couid%>">  
             <div class="row">
                 <div class="col-md-6"><center>
-                        <h1><br>编辑教学文档<br><br></h1>
+                        <h1><br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;编辑教学文档<br><br></h1>
                     </center>
-                    <textarea name="work"class="bg-success" id="text-input"  oninput="this.editor.update()" rows="6">Type **Markdown** here.</textarea>
+                    <textarea name="work"class="bg-success" id="text-input"  oninput="this.editor.update()" rows="6">Type **Markdown** here.</textarea><br><br>
                     <div id="divMessage"></div>
-                    <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;输入标题：<input type="text" name="title">
+                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;请输入标题：<input type="text" name="title" value="无标题">
                 </div>
-                <div class="col-md-6"><center><h1><br>预览效果<br><br></h1></center>
+                <div class="col-md-6"><h1><br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;预览效果<br><br></h1>
                     <div id="preview" class="bg-primary" rows="6"> </div><br>
 
                     </h1>&emsp;<input type="submit" class="class1" value="发布"/>
-                    &emsp;<a href="teaHomepage.jsp">取消并返回主页</a>
+                    &emsp;<a href="teaHomepage.jsp">返回主页</a>
                 </div>
             </div>
         </form> 
@@ -91,13 +91,3 @@
         </script>
     </body>
 </html>
-<script>
-//取出传回来的参数error并与yes比较
-    var error1 = '<%=request.getParameter("m")%>';
-    if (error1 === 'no') {
-        alert("发布失败!");
-    }
-    if (error1 === 'yes') {
-        confirm("发布成功！");
-    }
-</script>

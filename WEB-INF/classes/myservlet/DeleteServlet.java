@@ -44,12 +44,14 @@ public class DeleteServlet extends HttpServlet{
         //out.println("<a href=Tea_Homepage.jsp>回到教师主页面</a>");
         //out.println("<a href=ManageFile.jsp>回到ManageFile.jsp页面</a>");
         //out.println("</html></body>");
-		//RequestDispatcher dispatcher = request.getRequestDispatcher("ManageFile.jsp?couid="+couid);
-		//dispatcher.forward(request, response);
-		response.getWriter().print("<script type='text/javascript' charset='UTF-8'>confirm(删除成功);windows.location='ManageFile.jsp?couid="+ couid +"'</script>");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("ManageFile.jsp?couid="+couid);
+		dispatcher.forward(request, response);
+//		response.getWriter().print("<script type='text/javascript' charset='UTF-8'>confirm(删除成功);windows.location='ManageFile.jsp?couid="+ couid +"'</script>");
 
     }
     catch(Exception e){}
+//	response.getWriter().print("<script type='text/javascript' charset='UTF-8'>confirm(删除成功);windows.location='ManageFile.jsp?couid="+ couid +"'</script>");
+
   }
 
 	public void deleteFile(String path){

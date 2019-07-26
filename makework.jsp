@@ -1,4 +1,5 @@
 
+<%@page import="java.util.Calendar"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -59,6 +60,15 @@
             String teaid = request.getParameter("teaid");//获取传递过来的参数
             String couid = request.getParameter("couid");
             String classid = request.getParameter("classid");
+
+            SimpleDateFormat sdf = new SimpleDateFormat();//系统当前时间
+            sdf.applyPattern("yyyy-MM-dd HH:mm:ss");
+            Date date = new Date();
+            Calendar c =Calendar.getInstance();
+            c.setTime(date);
+            c.add(Calendar.DAY_OF_MONTH, 1);
+            Date tom = c.getTime();
+            String now = sdf.format(tom);
         %>
         <div class="row">
             <div class="col-md-6"><center>
@@ -67,14 +77,14 @@
                 <form method="post" action="makework?teaid=<%=teaid%>&couid=<%=couid%>&classid=<%=classid%>">        
                     <textarea name="work"class="bg-success" id="text-input"  oninput="this.editor.update()" rows="6">Type **Markdown** here.</textarea><br>
                     <h1>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;设置作业有效时段:</h1>
-                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;截止时间：<input name="etime" type="text" id="test" placeholder="yyyy-MM-dd HH:mm:ss">
+                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;截止时间：<input name="etime" type="text" id="test" value="<%=now%>">
                     <div id="divMessage"></div>
             </div>
             <div class="col-md-6"><h1><br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;预览效果<br><br></h1>
                 <div id="preview" class="bg-primary" rows="6"> </div><br>
                 &emsp;请提供一个参考答案：<input type="text" name="answer"><br><br>
                 </h1>&emsp;<input type="submit" class="class1" value="发布"/>
-                &emsp;<a href="teaHomepage.jsp">取消并返回主页</a>
+                &emsp;<a href="teaHomepage.jsp">返回主页</a>
             </div>
 
         </div>

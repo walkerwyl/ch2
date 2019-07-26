@@ -89,12 +89,12 @@
 	      }
 	      ,{title: '作业2', width:80,
 		    	 templet: function(d){
-		    	    return '<a style="text-decoration:underline;" href="'+'${pageContext.request.contextPath}/upload/'+d.tea_id+'/'+d.cou_id+d.class_id+'/work2/'+d.stu_id+'.txt'+'" target="_blank">作业2</a>' ;
+		    	    return '<a style="text-decoration:underline;" href="'+'${pageContext.request.contextPath}/upload/'+d.tea_id+'/'+d.cou_id+ '/'+d.class_id+'/work2/'+d.stu_id+'.txt'+'" target="_blank">作业2</a>' ;
 		    	 }
 		   }
 	      ,{title: '作业3', width:80,
 		    	 templet: function(d){
-		    	    return '<a style="text-decoration:underline;" href="'+'${pageContext.request.contextPath}/upload/'+d.tea_id+'/'+d.cou_id+d.class_id+'/work3/'+d.stu_id+'.txt'+'" target="_blank">作业3</a>' ;
+		    	    return '<a style="text-decoration:underline;" href="'+'${pageContext.request.contextPath}/upload/'+d.tea_id+'/'+d.cou_id+'/'+d.class_id+'/work3/'+d.stu_id+'.txt'+'" target="_blank">作业3</a>' ;
 		    	 }
 		  }
 	      
