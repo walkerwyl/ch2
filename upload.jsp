@@ -19,7 +19,7 @@
                 width: 40pt;
                 height: 27pt;
                 color:white;
-                background-color: #1e9eff;
+                background-color: #483f56;
                 font-size:15px;
                 padding: 10px;
                 resize: none;
@@ -33,10 +33,10 @@
         </style>
     </head>
     <body class="lay-blog">
-        <div class="header">
+        <div class="header layui-bg-cyan">
             <div class="header-wrap">
                 <h3 class="logo pull-left">
-                    <a href="Tea_Homepage2.jsp"><img src="https://www.layui.com/template/xianyan/demo/res/static/images/logo.png" alt="" class="logo-img"></a>
+                    <a href="teaHomepage.jsp"><img src="https://www.layui.com/template/xianyan/demo/res/static/images/logo.png" alt="" class="logo-img"></a>
                     <font face="楷体" color="white">welcome!<jsp:getProperty name="TeacherBean" property="name"/></font>
                 </h3>
             </div>
@@ -50,10 +50,10 @@
                             <%
                                 String Cou_ID = request.getParameter("Cou_ID");
                                 out.print("Couse ID:" + Cou_ID + "<br><br>");
-                                request.getSession().setAttribute("cou_id", Cou_ID);
+                                request.getSession().setAttribute("couid", Cou_ID);
                             %>
                             <legend>上传单个文件</legend>
-                            <form action="newUploadServlet" method="post" enctype="multipart/form-data">
+                            <form action="UploadServlet" method="post" enctype="multipart/form-data">
                                 上传文件：
                                 <input type="file" name="file"><br><br>
                                 <input type="submit" class="class1" value="上传">

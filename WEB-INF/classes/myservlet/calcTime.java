@@ -8,8 +8,10 @@ import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.servlet.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.*;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -62,38 +64,40 @@ public class calcTime extends HttpServlet {
 		ps = DB.dbCon().prepareStatement("UPDATE source SET Sum_Count=Sum_Count+1 WHERE Sou_ID=?");
 		ps.setString(1,souid);
 		ps.executeUpdate();
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("viewSources.jsp");
+		dispatcher.forward(request, response);
 	}
 	catch(Exception e){}
 
+}
+
 
         
-        response.setContentType("text/html;charset=UTF-8");
+//        response.setContentType("text/html;charset=UTF-8");
         
-        try (PrintWriter out = response.getWriter()) {
+//        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet calcTime</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet calcTime at " + request.getContextPath() + "</h1>");
-            out.println("startTime=" + start);
-            out.println("endTime=" + end);
-	    out.println("timeCount=" + timeCount);
-	    out.println("stuid=" + stuid);
-	    out.println("classid=" + classid);
-
+//            out.println("<!DOCTYPE html>");
+//            out.println("<html>");
+//            out.println("<head>");
+//            out.println("<title>Servlet calcTime</title>");            
+//            out.println("</head>");
+//            out.println("<body>");
+//            out.println("<h1>Servlet calcTime at " + request.getContextPath() + "</h1>");
+//            out.println("startTime=" + start);
+//            out.println("endTime=" + end);
+//	    out.println("timeCount=" + timeCount);
+//	    out.println("stuid=" + stuid);
+//	    out.println("classid=" + classid);
 //            out.println("小时："+ end.substring(0, 2));
 //            out.println("分钟："+ end.substring(3, 5));
 //            out.println("秒："+ end.substring(6));
 //            out.println(timeCount);
-            out.println("<a href=View_Sources.jsp>Reutrn to View_Sources.jsp</a>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-	catch(Exception e){}
-    }
+//            out.println("<a href=viewSources.jsp>Reutrn to viewSources.jsp</a>");
+//            out.println("</body>");
+//            out.println("</html>");
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

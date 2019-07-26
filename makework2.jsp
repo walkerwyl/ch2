@@ -21,16 +21,16 @@
                 font-weight: 500;
                 line-height: 23px;
             }
-	    .class1{
+            .class1{
                 border:0px;
                 width: 30pt;
                 height: 18pt;
-		color:white;
+                color:white;
                 background-color: #1e9eff;
-		font-size:15px;
+                font-size:15px;
             }
             #text-input {
-                margin-left: 3%;
+                margin-right: 50%;
                 padding: 15px;
                 height: 400px;
                 width: 70%;
@@ -57,36 +57,6 @@
                 overflow-x: none;
             }
         </style>
-        <script>
-            function showFormat(obj) {
-                var model = "1970-01-01 00:00:00";
-                var reg = /^\d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d$/;
-                var flag = false;
-
-                while (!flag) {
-                    var tempDateStr = obj.value + model.substring(obj.value.length);
-                    flag = reg.test(tempDateStr);
-                    divMessage.innerHTML = "<font color='red'>" + tempDateStr + "</font>";
-
-                    obj.value = (flag && checkDate(tempDateStr)) ? obj.value : obj.value.substring(0, obj.value.length - 1);
-                }
-            }
-
-            function checkDate(ds) {
-                var reg = /^(\d{1,4})-(\d{1,2})-(\d{1,2}) (\d{1,2}):(\d{1,2}):(\d{1,2})$/
-                var mr = reg.exec(ds);
-                if (!mr)
-                    return false;
-                var y = parseInt(mr[1]);
-                var m = parseInt(mr[2]) - 1;
-                var d = parseInt(mr[3]);
-                var date = new Date(ds.replace(/-/, "/"));
-                return ((date.getYear() == y || date.getYear() == y - 1900) &&
-                        date.getMonth() == m &&
-                        date.getDate() == d &&
-                        date.toString() != "NaN");
-            }
-        </script>
     </head>
     <body class="lay-blog">
         <div class="header">
@@ -103,46 +73,51 @@
             String couid = request.getParameter("couid");
             String classid = request.getParameter("classid");
         %>
-
         <div class="row">
             <form method="post" action="makework?teaid=<%=teaid%>&couid=<%=couid%>&classid=<%=classid%>">
                 <h1>编辑要发布的作业内容：</h1>             
                 <textarea name="work"class="bg-success" id="text-input"  oninput="this.editor.update()" clo="" rows="6">Type **Markdown** here.</textarea>
                 <h1>设置作业有效时段</h1>
-                截止时间：<input name="etime" type="text" value="2019-7-19 17:06:00" onkeyup="showFormat(this)"/>
+                截止时间：<input name="etime" type="text" id="test" placeholder="yyyy-MM-dd HH:mm:ss">
                 <div id="divMessage"></div>
                 <h1>预览效果：</h1>
                 <div id="preview" class="bg-primary" rows="6"> </div><br>
                 请提供一个参考答案：<input type="text" name="answer" value="" />
                 <input type="submit" class="class1" value="发布"/>
             </form>  
-    </div>  
-    <script src="https://cdn.bootcss.com/markdown.js/0.5.0/markdown.min.js"></script>
-
-    <script>
-                        function Editor(input, preview) {
-                            this.update = function () {
-                                preview.innerHTML = markdown.toHTML(input.value);
-                            };
-                            input.editor = this;
-                            this.update();
-                        }
-                        var $ = function (id) {
-                            return document.getElementById(id);
-                        };
-                        new Editor($("text-input"), $("preview"));
-    </script>
-    <br><br><br><br>
-    <div class="footer">
-        <p><span>欢迎使用OLAS</span></p>
-    </div>
-    <script src="https://www.layui.com/template/xianyan/demo/res/layui/layui.js"></script>
-    <script>
-                        layui.config({
-                            base: '../res/static/js/'
-                        }).use('blog');
-    </script>  
-</body>
+        </div>  
+        <script src="laydate/laydate.js"></script>
+        <script>
+            laydate.render({
+                elem: '#test'
+                , type: 'datetime'
+            });
+        </script>
+        <script src="https://cdn.bootcss.com/markdown.js/0.5.0/markdown.min.js"></script>
+        <script>
+            function Editor(input, preview) {
+                this.update = function () {
+                    preview.innerHTML = markdown.toHTML(input.value);
+                };
+                input.editor = this;
+                this.update();
+            }
+            var $ = function (id) {
+                return document.getElementById(id);
+            };
+            new Editor($("text-input"), $("preview"));
+        </script>
+        <br><br><br><br>
+        <div class="footer">
+            <p><span>欢迎使用OLAS</span></p>
+        </div>
+        <script src="https://www.layui.com/template/xianyan/demo/res/layui/layui.js"></script>
+        <script>
+            layui.config({
+                base: '../res/static/js/'
+            }).use('blog');
+        </script>  
+    </body>
 </html>
 <script>
 

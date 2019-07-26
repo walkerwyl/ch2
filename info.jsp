@@ -50,7 +50,7 @@
                 </div>
 
                 <form name="add" action="addStu_servlet" method="post">
-                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<input type="button" class="layui-btn layui-btn-normal" value="添加学生" onclick="input()"/>
+                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<input type="button" class="layui-btn" value="添加学生" onclick="input()"/>
                     <div id="showDiv" style="display:none;">
                        <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; <label >输入学生ID</label>
                         <input type="text" name="stu_ID"/>

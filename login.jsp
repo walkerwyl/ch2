@@ -1,68 +1,60 @@
-<%@page contentType="text/html" pageEncoding="GBK"%>
+<%-- 
+    Document   : login2
+    Created on : 2019-7-22, 14:57:17
+    Author     : liqr
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=GBK">
-        <title>Login</title>
-        <style>
-            .header {
-                position: absolute;
-                top: 100px;
-                right:200px;
-                background-color: transparent;
-                padding: 20px;
-                text-align: center;
+        <meta charset="utf-8">
+        <title>鐧婚檰 - OLAS</title>
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        <link rel="stylesheet" href="https://www.layui.com/admin/std/dist/layuiadmin/layui/css/layui.css" media="all">
+        <link rel="stylesheet" href="https://www.layui.com/admin/std/dist/layuiadmin/style/admin.css" media="all">
+        <link rel="stylesheet" href="https://www.layui.com/admin/std/dist/layuiadmin/style/login.css" media="all">
 
-            }
-            #tab {
-                position: absolute;
-                top: 200px;
-                right:200px;
-                width:350px;
-                opacity: 0.7;
-            }
-        </style>
     </head>
 
-    <body style="background-size:100% 100% ; background-attachment: fixed" background="pic/bg1.jpg">
 
-    <center>
-        <div class="header">
 
-            <font size="10" face="楷体">欢迎登陆</font><font size="10" face="Times New Roman">OLAS</font>
-        </div>
-        <form   action="LoginServlet" method="post" >
-            <table id="tab"  style="border:3px solid #a9c9e2;background:#eff7ff" cellpadding="3" >
-                <tbody>
-                    <tr>  
-                        <th><font size="4" color="black" >ID:</font></th>
+    <body background='pic/bg2.png'>
 
-                        <td><input type="text" name="id" value="" style="font-size:16px"/></td>
-                    </tr>
-                    <tr>
-                        <th><font size="4" color="black" >Password:</font></th>
+        <div class="bodystyle"></div>
+        <form action="LoginServlet" method="post">
+            <div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login" style="display: none;">
+                <div class="layadmin-user-login-main">
+                    <div class="layadmin-user-login-box layadmin-user-login-header">
+                        <h2>WELCOME TO OLAS!</h2>
+                        <p>娆㈣繋鐧婚檰鍦ㄧ嚎瀛︿範杈呭姪绯荤粺</p>
+                    </div>
+                    <div class="layadmin-user-login-box layadmin-user-login-body layui-form">
+                        <div class="layui-form-item">
+                            <label class="layadmin-user-login-icon layui-icon layui-icon-username" for="LAY-user-login-username"></label>
+                            <input type="text" name="id" id="LAY-user-login-username" lay-verify="required" placeholder="鐢ㄦ埛鍚嶏紙ID)" class="layui-input">
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layadmin-user-login-icon layui-icon layui-icon-password" for="LAY-user-login-password"></label>
+                            <input type="password" name="password" id="LAY-user-login-password" lay-verify="required" placeholder="瀵嗙爜" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="margin-bottom: 20px;">
+                        <center>  <p>閫夋嫨鎮ㄧ殑韬唤<br><br>
+                                <input type="radio" name="identity" checked value="teacher" lay-skin="primary"/>鑰佸笀
 
-                        <td><input type="password" name="password" value="" style="font-size:16px"/></td>
-                    </tr>
-                    <tr>
-                        <th><font size="4" color="black" >选择您的身份</font></th>
-                        <td>
-                            <input type="radio" name="identity" checked value="teacher"/><font size="3" color="black" >老师</font>
-                            <input type="radio" name="identity" value="student"/><font size="3" color="black" >学生</font>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>  </th>
-                        <td>
-                            <input type="submit"  style="width:60px;height:30px;vertical-align:middle;margin:8px;line-height:18px;font-size:18px;" value="登录"/>
-                            <input type="reset"  style="width:60px;height:30px;vertical-align:middle;margin:8px;line-height:18px;font-size:18px;" value="清空"/>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                                <input type="radio" name="identity" value="student" lay-skin="primary"/>瀛︾敓</p>
+                        </center>
+                    </div>
+                    <div class="layui-form-item">
 
+                        <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="LAY-user-login-submit" >鐧� 闄�</button>
+
+                    </div>
+                </div>
+            </div>
         </form>
-
-    </center>
-</body>
+    </body>
 </html>

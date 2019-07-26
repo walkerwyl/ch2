@@ -30,13 +30,21 @@ public class addStu_servlet extends HttpServlet {
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://112.74.58.75:3306/OLAS_DB?useUnicode=true&characterEncoding=utf-8", "root", "41710020wys");
             PreparedStatement ps;
-            ps = con.prepareStatement("select Name from student where Stu_ID=" + stu_ID);
+            ps = con.prepareStatement("select * from info where Class_ID=? and Stu_ID=?");
+            ps.setString(1, class_ID);
+            ps.setString(2, stu_ID);
             ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                    response.getWriter().print("<script type='text/javascript' charset='UTF-8'>confirm('failed  student is in this class');window.location='info.jsp';</script>");
+            }else{
+            ps = con.prepareStatement("select Name from student where Stu_ID=" + stu_ID);
+            rs = ps.executeQuery();
             if (!rs.next()) {
-              response.getWriter().print("<script type='text/javascript' charset='UTF-8'>confirm('failed  student not found');window.location='info.jsp';</script>");
-              //  response.getWriter().print("not found");
-            }
+                response.getWriter().print("<script type='text/javascript' charset='UTF-8'>confirm('failed  student not found');window.location='info.jsp';</script>");
+                //  response.getWriter().print("not found");
+            }else{
             stu_name = rs.getString(1);
+
             ps = con.prepareStatement("insert into info values(?,?,0,0,0,0,0,?)");
             ps.setString(1, class_ID);
             ps.setString(2, stu_ID);
@@ -44,13 +52,14 @@ public class addStu_servlet extends HttpServlet {
             ps.executeUpdate();
             //response.getWriter().print("success");
             response.getWriter().print("<script type='text/javascript' charset='UTF-8'>confirm('success');window.location='info.jsp';</script>");
-
+		}
+		}
         } catch (Exception ex) {
-           
-           try {
+
+            try {
                 response.getWriter().print("<script type='text/javascript' charset='UTF-8'>confirm('failed');window.location='info.jsp';</script>");
-           // response.getWriter().print(ex);
-           } catch (IOException ex1) {
+                // response.getWriter().print(ex);
+            } catch (IOException ex1) {
                 Logger.getLogger(addStu_servlet.class.getName()).log(Level.SEVERE, null, ex1);
             }
         }

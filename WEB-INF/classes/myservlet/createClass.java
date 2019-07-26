@@ -48,20 +48,25 @@ public class createClass extends HttpServlet {
             String header = part.getHeader("content-disposition");
             //获取文件名
             String fileName = getFileName(header);
-            
+
             //把文件写到指定路径
             part.write(savePath + File.separator + fileName);
             //读取文件分析
-            File file = new File(savePath, fileName);
-            writedb(file, response);
-            file.delete();
-            
-            
-           
+
+            File file = new File(savePath + File.separator + fileName);
+            if (!file.exists()) {
+                response.getWriter().print("<script type='text/javascript' charset='UTF-8'>alert('you have not chosen file');window.location='Tea_Homepage2.jsp';</script>");
+            } else {
+                create(file, request, response);
+
+                file.delete();
+
+            }
+
         }
     }
 
-    public void writedb(File file, HttpServletResponse response) throws IOException {
+    public void create(File file, HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         ResultSet class_rs;
         ResultSet tea_rs;
@@ -92,15 +97,24 @@ public class createClass extends HttpServlet {
             ss = sheet.getRow(2).getCell(4).getStringCellValue().split("：");
             String cou_name = ss[1];
             //课程名称对应ID
-            String cou_ID, class_ID, maxClassID;
+            String cou_ID = null, class_ID = null, maxClassID = null;
             //获取课程和班级ID
-            class_rs = sql.executeQuery("select * from class");
-            while (class_rs.next()) {
-                if (cou_name.equals(class_rs.getString(3))) {
-                    break;
+            class_rs = sql.executeQuery("select * from class where Cou_Name=" + cou_name);
+            if (class_rs.next()) {
+                cou_ID = class_rs.getString(1);
+            } else {
+                class_rs=sql.executeQuery("select * from class");
+               class_rs.absolute(1);
+		 String maxCouID = class_rs.getString(1);
+                
+                while (class_rs.next()) {
+                    if (Integer.valueOf(class_rs.getString(1)) >= Integer.valueOf(maxCouID)) {
+                        maxCouID = class_rs.getString(1);
+                    }
                 }
-            }
-            cou_ID = class_rs.getString(1);
+                cou_ID = String.valueOf(Integer.valueOf(maxCouID) + 1);
+           }
+            class_rs=sql.executeQuery("select * from class");
             class_rs.absolute(1);
             maxClassID = class_rs.getString(2);
             while (class_rs.next()) {
@@ -119,9 +133,9 @@ public class createClass extends HttpServlet {
             //学生信息
             String stu_ID, stu_name;
             ps = con.prepareStatement("insert into info values(?,?,0,0,0,0,0,?)");
-            for (int i = 5; i < rowLength ; i++) {
+            for (int i = 5; i < rowLength; i++) {
                 XSSFCell cell = sheet.getRow(i).getCell(1);
-                if (cell.getStringCellValue().length()>5) {
+                if (cell.getStringCellValue().length() > 5) {
                     stu_ID = sheet.getRow(i).getCell(1).getStringCellValue();
                     stu_name = sheet.getRow(i).getCell(2).getStringCellValue();
                     ps.setString(1, class_ID);
@@ -132,14 +146,33 @@ public class createClass extends HttpServlet {
                     break;
                 }
             }
-            response.getWriter().print("<script type='text/javascript' charset='UTF-8'>confirm('success');window.location='Tea_Homepage2.jsp';</script>");        
-} catch (Exception ex) {
-           try {
-            response.getWriter().print("<script type='text/javascript' charset='UTF-8'>alert('failed');window.location='Tea_Homepage2.jsp';</script>");           
- } catch (IOException ex1) {
+            String path = request.getServletContext().getRealPath("/upload/" + tea_ID + "/" + cou_ID + "/" + class_ID);//获取路径
+            newfile(path, response);
+            response.getWriter().print(path);
+//response.getWriter().print("<script type='text/javascript' charset='UTF-8'>confirm('success');window.location='teaHomepage.jsp';</script>");
+        } catch (Exception ex) {
+            try {
+                response.getWriter().print("<script type='text/javascript' charset='UTF-8'>alert('failed');window.location='teaHomepage.jsp';</script>");
+            } catch (IOException ex1) {
                 Logger.getLogger(createClass.class.getName()).log(Level.SEVERE, null, ex1);
             }
-           
+
+        }
+    }
+
+    public void newfile(String path, HttpServletResponse response) {
+        try {
+            File dir = new File(path);
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+
+        } catch (Exception e) {
+            try {
+                response.getWriter().print("<script type='text/javascript' charset='UTF-8'>alert('failed');window.location='teaHomepage.jsp';</script>");
+            } catch (IOException ex) {
+                Logger.getLogger(createClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 

@@ -47,9 +47,9 @@ public class HomeworkServlet extends HttpServlet {
             		writer.close();
         	} catch (Exception e) {
         	}
-		response.getWriter().print("<script type='text/javascript' charset='UTF-8'>confirm('success');window.location='Stu_Homepage2.jsp';</script>");
+		response.getWriter().print("<script type='text/javascript' charset='UTF-8'>confirm('success');window.location='stuHomepage.jsp';</script>");
     	}else{
-		response.getWriter().print("<script type='text/javascript' charset='UTF-8'>confirm('overtime');window.location='Stu_Homepage2.jsp';</script>");
+		response.getWriter().print("<script type='text/javascript' charset='UTF-8'>confirm('overtime');window.location='stuHomepage.jsp';</script>");
 	}
 	
 }

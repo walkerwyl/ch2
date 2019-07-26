@@ -5,14 +5,6 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
 	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 
-    <servlet>
-        <servlet-name>newUploadServlet</servlet-name>
-        <servlet-class>myservlet.newUploadServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>newUploadServlet</servlet-name>
-        <url-pattern>/newUploadServlet</url-pattern>
-    </servlet-mapping>
 
     <servlet>
         <servlet-name>UploadServlet</servlet-name>
@@ -122,11 +114,31 @@
 		<servlet-name>calcTime</servlet-name>
 		<url-pattern>/calcTime</url-pattern>
 	</servlet-mapping>
-	
+
+	<servlet>
+        <servlet-name>write</servlet-name>
+        <servlet-class>myservlet.write</servlet-class>
+   	</servlet>
+
+	<servlet-mapping>
+        <servlet-name>write</servlet-name>
+        <url-pattern>/write</url-pattern>
+    	</servlet-mapping>
+
+	<servlet>
+        <servlet-name>delete</servlet-name>
+        <servlet-class>myservlet.delete</servlet-class>
+   	</servlet>
+
+	<servlet-mapping>
+        <servlet-name>delete</servlet-name>
+        <url-pattern>/delete</url-pattern>
+    	</servlet-mapping>
+
 
     <session-config>
         <session-timeout>
-            30
+            60
         </session-timeout>
     </session-config>
 
