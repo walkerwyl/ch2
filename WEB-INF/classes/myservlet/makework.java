@@ -124,7 +124,7 @@ public class makework extends HttpServlet {
         } catch (Exception e) {
 
         }
-        response.sendRedirect("makework.jsp?m=yes");
+        response.sendRedirect("makework.jsp?m=yes&teaid=" + tea_ID + "&couid=" + cou_ID + "&classid=" + cla_ID + "");
     }
 
     /**

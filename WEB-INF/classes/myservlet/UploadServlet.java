@@ -155,7 +155,7 @@ public class UploadServlet extends HttpServlet {
 
 				}
 				//IF终止的地方-----------------------------------------------------------------------------------------------
-				RequestDispatcher dispatcher = request.getRequestDispatcher("MoreSources.jsp?couid=" + Cou_ID);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("ManageFile.jsp?couid=" + Cou_ID);
 				dispatcher.forward(request, response);
 		
 

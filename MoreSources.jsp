@@ -35,7 +35,7 @@
             <div class="container">
                 <div class="contar-wrap"> 
                     <%
-                        String couid = request.getParameter("couid");
+                        //String couid = request.getParameter("couid");
                         try {
                             PreparedStatement ps;
                             ps = DB.dbCon().prepareStatement("SELECT * FROM source WHERE Share=0");
@@ -49,6 +49,7 @@
                             &emsp;&emsp;&emsp;&emsp;
                             <%
                         	String teaid = rs.getString(1);
+				String couid = rs.getString(2);
                                 String souid = rs.getString(4);
                                 String filename = rs.getString(6);
                                 String fn = filename.split("\\.")[1];

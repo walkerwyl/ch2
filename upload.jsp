@@ -49,7 +49,7 @@
                         <fieldset>
                             <%
                                 String Cou_ID = request.getParameter("Cou_ID");
-                                out.print("Couse ID:" + Cou_ID + "<br><br>");
+                                //out.print("Couse ID:" + Cou_ID + "<br><br>");
                                 request.getSession().setAttribute("couid", Cou_ID);
                             %>
                             <legend>上传单个文件</legend>

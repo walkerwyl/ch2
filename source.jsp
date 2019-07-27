@@ -1,4 +1,4 @@
-﻿ <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +11,9 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/static/plugins/layuiadmin/style/admin.css" media="all">
 </head>
 <body>
-
+<%
+	String couname = request.getParameter("couname");
+%>
   <div class="layui-fluid">
     <div class="layui-card">
       <div class="layui-form layui-card-header layuiadmin-card-header-auto">
@@ -25,7 +27,7 @@
           <div class="layui-inline">
             <label class="layui-form-label">课程名称</label>
             <div class="layui-input-block">
-              <input type="text" name="cou_name" placeholder="请输入" autocomplete="off" class="layui-input">
+              <input type="text" name="cou_name" placeholder="请输入" autocomplete="off" class="layui-input" value=<%=couname%>>
             </div>
           </div>
           <div class="layui-inline">
@@ -80,25 +82,27 @@
 	      ,{field: 'work1', title: '分数1', width:80}
 	      ,{field: 'work2', title: '分数2', width:80}
 	      ,{field: 'work3', title: '分数3', width:80}
-	      //,{field: 'sou_id', title: '作业资源Id', width:80}
+	      //,{field: 'sou_id', title: '作业编号', width:80}
 	      // ,{field: 'sou_name', title: '作业资源名称', width:80}
 	      ,{title: '作业1', width:80,
 	    	 templet: function(d){
-	    	    return '<a style="text-decoration:underline;" href="'+'${pageContext.request.contextPath}/upload/'+d.tea_id+'/'+d.cou_id+'/'+d.class_id+'/work1/'+d.stu_id+'.txt'+'" target="_blank">作业1</a>' ;
+	    	    return '<a style="text-decoration:underline;" href="checkhomework.jsp?teaid='+d.tea_id+'&couid='+d.cou_id+'&classid='+d.class_id+'&stuid='+d.stu_id+'&workname=Work1">作业1</a>' ;
 	    	 }
 	      }
 	      ,{title: '作业2', width:80,
 		    	 templet: function(d){
-		    	    return '<a style="text-decoration:underline;" href="'+'${pageContext.request.contextPath}/upload/'+d.tea_id+'/'+d.cou_id+ '/'+d.class_id+'/work2/'+d.stu_id+'.txt'+'" target="_blank">作业2</a>' ;
+	    	    return '<a style="text-decoration:underline;" href="checkhomework.jsp?teaid='+d.tea_id+'&couid='+d.cou_id+'&classid='+d.class_id+'&stuid='+d.stu_id+'&workname=Work2">作业2</a>' ;
+//		    	    return '<a style="text-decoration:underline;" href="'+'${pageContext.request.contextPath}/upload/'+d.tea_id+'/'+d.cou_id+ '/'+d.class_id+'/work2/'+d.stu_id+'.txt'+'" target="_blank">作业2</a>' ;
 		    	 }
 		   }
 	      ,{title: '作业3', width:80,
 		    	 templet: function(d){
-		    	    return '<a style="text-decoration:underline;" href="'+'${pageContext.request.contextPath}/upload/'+d.tea_id+'/'+d.cou_id+'/'+d.class_id+'/work3/'+d.stu_id+'.txt'+'" target="_blank">作业3</a>' ;
+	    	    return '<a style="text-decoration:underline;" href="checkhomework.jsp?teaid='+d.tea_id+'&couid='+d.cou_id+'&classid='+d.class_id+'&stuid='+d.stu_id+'&workname=Work3">作业3</a>' ;
+//		    	    return '<a style="text-decoration:underline;" href="'+'${pageContext.request.contextPath}/upload/'+d.tea_id+'/'+d.cou_id+'/'+d.class_id+'/work3/'+d.stu_id+'.txt'+'" target="_blank">作业3</a>' ;
 		    	 }
 		  }
 	      
-	     ,{title: '打分', width: 150, align:'center', fixed: 'right', toolbar: '#line-btn'}
+	    // ,{title: '打分', width: 150, align:'center', fixed: 'right', toolbar: '#line-btn'}
 	    ]]
 	    //,skin:'nob'//line （行边框风格）row （列边框风格）  nob （无边框风格）
 	    ,even:true //若不开启隔行背景，不设置该参数即可

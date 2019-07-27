@@ -24,9 +24,7 @@ public class LogoutServlet extends HttpServlet {
 			session.removeAttribute("TeacherBean");
 			session.removeAttribute("StudentBean");
 			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
-            		dispatcher.forward(request, response);
-        
+       			response.sendRedirect("login.jsp"); 
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -1,9 +1,3 @@
-<%-- 
-    Document   : login2
-    Created on : 2019-7-22, 14:57:17
-    Author     : liqr
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -22,6 +16,7 @@
 
 
     <body background='pic/bg2.png'>
+
 
         <div class="bodystyle"></div>
         <form action="LoginServlet" method="post">

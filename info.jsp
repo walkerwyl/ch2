@@ -11,15 +11,17 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/static/plugins/layuiadmin/style/admin.css" media="all">
     </head>
     <body>
-
+	<%
+		String classid = request.getParameter("classid");
+	%>
         <div class="layui-fluid">
             <div class="layui-card">
                 <div class="layui-form layui-card-header layuiadmin-card-header-auto">
                     <div class="layui-form-item">
                         <div class="layui-inline">
-                            <label class="layui-form-label">班级ID</label>
+                            <label class="layui-form-label">班级号</label>
                             <div class="layui-input-block">
-                                <input type="text" name="class_id" placeholder="请输入" autocomplete="off" class="layui-input">
+                                <input type="text" name="class_id" placeholder="请输入" autocomplete="off" class="layui-input" value=<%=classid%> disabled>
                             </div>
                         </div>
                         <div class="layui-inline">
@@ -50,12 +52,11 @@
                 </div>
 
                 <form name="add" action="addStu_servlet" method="post">
-                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<input type="button" class="layui-btn" value="添加学生" onclick="input()"/>
+                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<input type="button" class="layui-btn layui-btn-normal" value="添加学生" onclick="input()"/>
                     <div id="showDiv" style="display:none;">
-                       <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; <label >输入学生学号</label>
+                       <br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<label>输入学生学号</label>
                         <input type="text" name="stu_ID"/>
-			<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<label >输入班级代号</label>
-                        <input type="text" name="class_ID"/>
+			<input name="class_ID" value=<%=classid%> type="hidden"/>
                         &emsp;&emsp;<input type="submit" class="layui-btn layui-btn-normal" value="确定" />
                     </div>
                     <script>
@@ -96,7 +97,7 @@
                                 , cols: [[//表头
                                         {type: 'checkbox', fixed: 'left'}
                                         , {title: '序号', width: 80, type: 'numbers', fixed: 'left'}
-                                        , {field: 'class_id', title: '班级ID', width: 100, fixed: 'left'}
+                                        , {field: 'class_id', title: '班级号', width: 100, fixed: 'left'}
                                         , {field: 'cou_name', title: '课程名称', width: 100, fixed: 'left'}
                                         , {field: 'name', title: '教师姓名', width: 100, fixed: 'left'}
                                         , {field: 'stu_id', title: '学号 ', width: 100}

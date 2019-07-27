@@ -25,7 +25,7 @@
                 </h3>
 		 <h3 class="logo pull-right">
                     <a href="LogoutServlet">
-                        <img src="pic/logout.jpg" width="35" height="35"/>
+                        <img src="pic/logout2.jpg" width="35" height="35"/>
                     </a>
                 </h3>
             </div>

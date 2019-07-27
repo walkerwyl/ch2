@@ -17,7 +17,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://www.layui.com/template/xianyan/demo/res/layui/css/layui.css">
         <link rel="stylesheet" href="https://www.layui.com/template/xianyan/demo/res/static/css/mian.css">
-       
+
     </head>
     <body class="lay-blog">
         <div class="header layui-bg-cyan">
@@ -29,7 +29,7 @@
                 </h3>
                 <h3 class="logo pull-right">
                     <a href="LogoutServlet">
-                        <img src="pic/logout.jpg" width="35" height="35"/>
+                        <img src="pic/logout1.jpg" width="35" height="35"/>
                     </a>
                 </h3>
             </div>
@@ -39,10 +39,10 @@
                 <div class="contar-wrap">
                     <br><br><br><br><br> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                     <form name="create" action="${pageContext.request.contextPath}/createClass" enctype="multipart/form-data" method="post">
-                       创建班级：<input type="file" style="opacity:0.8"  name="file" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />  
+                        创建班级：<input type="file" style="opacity:0.8"  name="file" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />  
                         <input type="submit" style="opacity:0.8" class="layui-btn layui-btn-primary layui-bg-cyan"  value="上传"/> <br><br>
-                     </form>                          
-	
+                    </form>                          
+
                     <%
                         Set cources = new HashSet();
                         PreparedStatement ps, ps2, ps3;
@@ -73,13 +73,13 @@
                             rs2 = ps2.executeQuery();
 
                             out.print("<div class='item'>");
-                            out.print("<div class='item-box layer-photos-demo1 layer-photos-demo'><br><h2>课程：&emsp;" + couname );
+                            out.print("<div class='item-box layer-photos-demo1 layer-photos-demo'><br><h2>课程：&emsp;" + couname);
                             out.print("</h2><div style='float:right '><a href=ManageFile.jsp?couid=" + cou_id + ">管理资源</a></div></div>");
                             while (rs2.next()) {
                                 out.print("<div class='item-box  layer-photos-demo1 layer-photos-demo layui-bg-cyan'><br> &emsp;&emsp;&emsp;&emsp;&emsp;" + rs2.getString(2) + "班</div>");
-                                out.print("<div class='comment count '><p><a href=info.jsp>查看详细信息</a>");
+                                out.print("<div class='comment count '><p><a href=info.jsp?classid=" + rs2.getString(2) + ">查看详细信息</a>");
                                 out.print(" <a href=makeannounce.jsp?teaid=" + TeacherBean.getTea_ID() + "&couid=" + cou_id + "&classid=" + rs2.getString(2) + ">发布通知</a>");
-                                out.print("<div class='comment count '><a href=makework.jsp?teaid=" + TeacherBean.getTea_ID() + "&couid=" + cou_id + "&classid=" + rs2.getString(2) + ">发布作业</a><a href=source.jsp>批改作业</a></p></div></div>");
+                                out.print("<div class='comment count '><a href=makework.jsp?teaid=" + TeacherBean.getTea_ID() + "&couid=" + cou_id + "&classid=" + rs2.getString(2) + ">发布作业</a><a href=source.jsp?couname=" + rs2.getString(3) + "&teaname=" + TeacherBean.getName()+ ">批改作业</a></p></div></div>");
 
                             }
                             out.print("</div>");
@@ -91,9 +91,9 @@
         <br><br><br><br>
         <script src="https://www.layui.com/template/xianyan/demo/res/layui/layui.js"></script>
         <script>
-                 layui.config({
-                     base: '../res/static/js/'
-                 }).use('blog');
+            layui.config({
+                base: '../res/static/js/'
+            }).use('blog');
         </script>
     </body>
 </html>

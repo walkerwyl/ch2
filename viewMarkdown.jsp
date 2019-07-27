@@ -87,7 +87,7 @@
             String temp = null;
             while ((temp = bufferedReader.readLine()) != null) {
                 txt.append(temp);
-                txt.append("\n");
+                txt.append("\n\n");
             }
             reader.close();
             bufferedReader.close();

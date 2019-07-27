@@ -1,4 +1,13 @@
 
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.io.File"%>
+<%@page import="java.util.Arrays"%>
+<%@page import="java.io.IOException"%>
+<%@page import="java.io.BufferedReader"%>
+<%@page import="java.io.FileReader"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -61,56 +70,136 @@
             String couid = request.getParameter("couid");
             String classid = request.getParameter("classid");
 
-            SimpleDateFormat sdf = new SimpleDateFormat();//系统当前时间
-            sdf.applyPattern("yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat sdf2 = new SimpleDateFormat();//系统当前时间
+            sdf2.applyPattern("yyyy-MM-dd HH:mm:ss");
             Date date = new Date();
-            Calendar c =Calendar.getInstance();
+            Calendar c = Calendar.getInstance();
             c.setTime(date);
             c.add(Calendar.DAY_OF_MONTH, 1);
             Date tom = c.getTime();
-            String now = sdf.format(tom);
+            String now = sdf2.format(tom);
         %>
         <div class="row">
-            <div class="col-md-6"><center>
-                    <h1><br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;编辑作业<br><br></h1>
-                </center>
-                <form method="post" action="makework?teaid=<%=teaid%>&couid=<%=couid%>&classid=<%=classid%>">        
+            <form method="post" action="makework?teaid=<%=teaid%>&couid=<%=couid%>&classid=<%=classid%>">   
+                <div class="col-md-6"><center>
+                        <h1><br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;编辑作业<br><br></h1>
+                    </center>  
                     <textarea name="work"class="bg-success" id="text-input"  oninput="this.editor.update()" rows="6">Type **Markdown** here.</textarea><br>
                     <h1>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;设置作业有效时段:</h1>
                     &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;截止时间：<input name="etime" type="text" id="test" value="<%=now%>">
-                    <div id="divMessage"></div>
-            </div>
-            <div class="col-md-6"><h1><br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;预览效果<br><br></h1>
-                <div id="preview" class="bg-primary" rows="6"> </div><br>
-                &emsp;请提供一个参考答案：<input type="text" name="answer"><br><br>
-                </h1>&emsp;<input type="submit" class="class1" value="发布"/>
-                &emsp;<a href="teaHomepage.jsp">返回主页</a>
-            </div>
+                    <h1>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;已发布的作业：
+                        <%
+                            String path = request.getServletContext().getRealPath("/upload/" + teaid + "/" + couid + "/" + classid);
+                            String mm = "work1";//从work1开始判断，如果不为空就到下一个文件夹
+                            File backfile = new File(path + "/" + mm);
+                            if (backfile != null && backfile.exists() && backfile.isDirectory()) {
+                                File[] files = backfile.listFiles();
+                                if (files != null && files.length > 0) {
 
+                        %>
+                        work1:
+                        <%                                    try {
+                                        FileReader reader = new FileReader(path + "/work1/answer.txt");
+                                        BufferedReader bufferedReader = new BufferedReader(reader);
+                                        StringBuffer txt = new StringBuffer();
+                                        String temp = null;
+                                        while ((temp = bufferedReader.readLine()) != null) {
+                                            txt.append(temp);
+                                            txt.append("<br>");
+                                        }
+                                        out.print(txt);
+                                        reader.close();
+                                        bufferedReader.close();
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                    mm = "work2";
+                                }
+                            }
+                            backfile = new File(path + "/" + mm);
+                            if (backfile != null && backfile.exists() && backfile.isDirectory()) {
+                                File[] files = backfile.listFiles();
+                                if (files != null && files.length > 0) {
+                        %>
+                    &emsp;&emsp;work2:
+                    <%
+                                try {
+                                    FileReader reader = new FileReader(path + "/work2/answer.txt");
+                                    BufferedReader bufferedReader = new BufferedReader(reader);
+                                    StringBuffer txt = new StringBuffer();
+                                    String temp = null;
+                                    while ((temp = bufferedReader.readLine()) != null) {
+                                        txt.append(temp);
+                                        txt.append("<br>");
+                                    }
+                                    out.print(txt);
+                                    reader.close();
+                                    bufferedReader.close();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                mm = "work3";
+                            }
+                        }
+                        backfile = new File(path + "/" + mm);
+                        if (backfile != null && backfile.exists() && backfile.isDirectory()) {
+                            File[] files = backfile.listFiles();
+                            if (files != null && files.length > 0) {
+                    %>
+                    &emsp;&emsp;work3
+                    <%
+                                try {
+                                    FileReader reader = new FileReader(path + "/work3/answer.txt");
+                                    BufferedReader bufferedReader = new BufferedReader(reader);
+                                    StringBuffer txt = new StringBuffer();
+                                    String temp = null;
+                                    while ((temp = bufferedReader.readLine()) != null) {
+                                        txt.append(temp);
+                                        txt.append("<br>");
+                                    }
+                                    out.print(txt);
+                                    reader.close();
+                                    bufferedReader.close();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    %>
+                    </h1>
+                    <div id="divMessage"></div>
+                </div>
+                <div class="col-md-6"><h1><br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;预览效果<br><br></h1>
+                    <div id="preview" class="bg-primary" rows="6"> </div><br>
+                    &emsp;请输入作业标题：<input type="text" name="answer"><br><br>
+                    </h1>&emsp;<input type="submit" class="class1" value="发布"/>
+                    &emsp;<a href="teaHomepage.jsp">返回主页</a>
+                </div>
+            </form>      
         </div>
-    </form> 
-    <script src="https://cdn.bootcss.com/markdown.js/0.5.0/markdown.min.js"></script>
-    <script>
-        function Editor(input, preview) {
-            this.update = function () {
-                preview.innerHTML = markdown.toHTML(input.value);
+
+        <script src="https://cdn.bootcss.com/markdown.js/0.5.0/markdown.min.js"></script>
+        <script>
+            function Editor(input, preview) {
+                this.update = function () {
+                    preview.innerHTML = markdown.toHTML(input.value);
+                };
+                input.editor = this;
+                this.update();
+            }
+            var $ = function (id) {
+                return document.getElementById(id);
             };
-            input.editor = this;
-            this.update();
-        }
-        var $ = function (id) {
-            return document.getElementById(id);
-        };
-        new Editor($("text-input"), $("preview"));
-    </script>
-    <script src="laydate/laydate.js"></script> 
-    <script>
-        laydate.render({
-            elem: '#test'
-            , type: 'datetime'
-        });
-    </script>
-</body>
+            new Editor($("text-input"), $("preview"));
+        </script>
+        <script src="laydate/laydate.js"></script> 
+        <script>
+            laydate.render({
+                elem: '#test'
+                , type: 'datetime'
+            });
+        </script>
+    </body>
 </html>
 <script>
 //取出传回来的参数error并与yes比较

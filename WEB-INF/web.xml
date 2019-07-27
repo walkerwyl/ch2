@@ -143,6 +143,14 @@
         <url-pattern>/delete</url-pattern>
     	</servlet-mapping>
 
+    <servlet>
+        <servlet-name>GradeServlet</servlet-name>
+        <servlet-class>myservlet.GradeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GradeServlet</servlet-name>
+        <url-pattern>/GradeServlet</url-pattern>
+    </servlet-mapping>
 
     <session-config>
         <session-timeout>
